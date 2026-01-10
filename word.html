@@ -1,0 +1,1571 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>Scrabble vs CPU (CSW)</title>
+<style>
+  :root{
+    --bg:#0f0f10; --panel:#171719; --panel2:#1e1e22;
+    --txt:#f2f2f2; --muted:#b9b9c0;
+    --grid:#2a2a2f; --cell:#121216;
+    --tw:#5a1b1b; --dw:#3c1f4f; --tl:#123b5a; --dl:#1f4a2c;
+    --accent:#7dd3fc; --danger:#fb7185; --ok:#86efac;
+    --tile:#f3e1b5; --tileTxt:#151515; --tileBorder:#bfa66e;
+    --tileBlank:#f7f0dc;
+  }
+  *{ box-sizing:border-box; }
+  body{
+    margin:0; background:var(--bg); color:var(--txt);
+    font-family: system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+    display:flex; justify-content:center;
+  }
+  .wrap{ width:min(1200px, 98vw); padding:14px 10px 24px; }
+  .top{
+    display:flex; gap:12px; align-items:stretch;
+    flex-wrap:wrap;
+  }
+  .boardWrap{
+    background:var(--panel);
+    border:1px solid #232329;
+    border-radius:14px;
+    padding:12px;
+    flex: 1 1 740px;
+  }
+  .side{
+    background:var(--panel);
+    border:1px solid #232329;
+    border-radius:14px;
+    padding:12px;
+    flex: 1 1 320px;
+    min-width:320px;
+    display:flex;
+    flex-direction:column;
+    gap:10px;
+  }
+  .hdr{
+    display:flex; align-items:center; justify-content:space-between;
+    gap:10px; padding:4px 2px 10px;
+  }
+  .title{ font-weight:700; letter-spacing:.2px; }
+  .status{ color:var(--muted); font-size:13px; }
+  .board{
+    display:grid;
+    grid-template-columns: repeat(15, 1fr);
+    gap:2px;
+    background:var(--grid);
+    border:2px solid var(--grid);
+    border-radius:10px;
+    overflow:hidden;
+    user-select:none;
+  }
+  .sq{
+    aspect-ratio:1/1;
+    background:var(--cell);
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    position:relative;
+    cursor:pointer;
+  }
+  .sq:hover{ outline:2px solid rgba(125,211,252,.18); outline-offset:-2px; }
+  .sq[data-prem="TW"]{ background:color-mix(in srgb, var(--tw) 85%, #000); }
+  .sq[data-prem="DW"]{ background:color-mix(in srgb, var(--dw) 85%, #000); }
+  .sq[data-prem="TL"]{ background:color-mix(in srgb, var(--tl) 85%, #000); }
+  .sq[data-prem="DL"]{ background:color-mix(in srgb, var(--dl) 85%, #000); }
+  .premTxt{
+    position:absolute; inset:0;
+    display:flex; align-items:center; justify-content:center;
+    font-size:10px; color:rgba(255,255,255,.55);
+    font-weight:700;
+    letter-spacing:.4px;
+    pointer-events:none;
+  }
+  .centerStar{
+    position:absolute; font-size:14px; opacity:.9;
+  }
+  .tile{
+    width:100%; height:100%;
+    display:flex; align-items:center; justify-content:center;
+    background:var(--tile);
+    color:var(--tileTxt);
+    border:2px solid var(--tileBorder);
+    border-radius:6px;
+    font-weight:900;
+    font-size:18px;
+    position:relative;
+    transform: translateZ(0);
+  }
+  .tile.blank{ background:var(--tileBlank); }
+  .pts{
+    position:absolute; right:4px; bottom:2px;
+    font-size:10px; font-weight:800;
+    opacity:.9;
+  }
+  .pendingOutline{
+    outline:2px solid var(--accent);
+    outline-offset:-2px;
+  }
+  .rackPanel{
+    background:var(--panel2);
+    border:1px solid #2a2a32;
+    border-radius:12px;
+    padding:10px;
+  }
+  .rackRow{
+    display:flex; gap:6px; flex-wrap:wrap;
+  }
+  .rackTile{
+    width:44px; height:44px;
+    border-radius:8px;
+    cursor:pointer;
+    display:flex; align-items:center; justify-content:center;
+    background:var(--tile);
+    border:2px solid var(--tileBorder);
+    color:var(--tileTxt);
+    font-weight:900;
+    position:relative;
+    user-select:none;
+  }
+  .rackTile.blank{ background:var(--tileBlank); }
+  .rackTile.sel{ outline:3px solid var(--accent); outline-offset:1px; }
+  .rackTile.exSel{ outline:3px solid #fbbf24; outline-offset:1px; }
+  .rackTile .pts{ right:6px; bottom:4px; }
+  .btnRow{ display:flex; gap:8px; flex-wrap:wrap; }
+  button{
+    appearance:none; border:1px solid #2a2a32;
+    background:#101014; color:var(--txt);
+    padding:10px 12px; border-radius:12px;
+    font-weight:700; cursor:pointer;
+  }
+  button:hover{ border-color:#3a3a45; }
+  button:disabled{ opacity:.5; cursor:not-allowed; }
+  .btnPrimary{ border-color:color-mix(in srgb, var(--accent) 50%, #2a2a32); }
+  .btnDanger{ border-color:color-mix(in srgb, var(--danger) 45%, #2a2a32); }
+  .mini{
+    font-size:12px; color:var(--muted);
+    display:flex; gap:10px; flex-wrap:wrap;
+  }
+  .scoreBox{
+    display:grid;
+    grid-template-columns: 1fr auto;
+    gap:6px 10px;
+    padding:10px;
+    border-radius:12px;
+    background:var(--panel2);
+    border:1px solid #2a2a32;
+  }
+  .scoreName{ color:var(--muted); font-size:13px; }
+  .scoreVal{ font-weight:900; }
+  .log{
+    background:var(--panel2);
+    border:1px solid #2a2a32;
+    border-radius:12px;
+    padding:10px;
+    min-height:160px;
+    max-height:320px;
+    overflow:auto;
+    font-size:13px;
+    line-height:1.35;
+    color:var(--muted);
+    white-space:pre-wrap;
+  }
+  .badge{
+    display:inline-flex;
+    align-items:center;
+    gap:8px;
+    padding:7px 10px;
+    border-radius:999px;
+    border:1px solid #2a2a32;
+    background:var(--panel2);
+    color:var(--muted);
+    font-size:12px;
+  }
+  .dot{ width:8px; height:8px; border-radius:50%; background:#666; }
+  .dot.ok{ background:var(--ok); }
+  .dot.wait{ background:#fbbf24; }
+  .dot.bad{ background:var(--danger); }
+  .toast{
+    margin-top:4px;
+    font-size:13px;
+    color:var(--muted);
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="top">
+    <div class="boardWrap">
+      <div class="hdr">
+        <div class="title">Scrabble vs CPU</div>
+        <div class="status" id="statusLine">Loading dictionary…</div>
+      </div>
+      <div class="board" id="board"></div>
+      <div class="toast" id="toast"></div>
+    </div>
+
+    <div class="side">
+      <div class="scoreBox">
+        <div class="scoreName">You</div><div class="scoreVal" id="scoreHuman">0</div>
+        <div class="scoreName">CPU</div><div class="scoreVal" id="scoreAI">0</div>
+        <div class="scoreName">Tiles left</div><div class="scoreVal" id="tilesLeft">100</div>
+      </div>
+
+      <div class="rackPanel">
+        <div class="mini">
+          <span class="badge"><span class="dot" id="turnDot"></span><span id="turnTxt">…</span></span>
+          <span class="badge">Mode: <span id="modeTxt">Play</span></span>
+        </div>
+        <div style="height:8px"></div>
+        <div class="rackRow" id="rack"></div>
+      </div>
+
+      <div class="btnRow">
+        <button class="btnPrimary" id="btnPlay">Play move</button>
+        <button id="btnShuffle">Shuffle rack</button>
+        <button id="btnExchange">Exchange</button>
+        <button id="btnPass">Pass</button>
+        <button class="btnDanger" id="btnNew">New game</button>
+      </div>
+
+      <div class="log" id="log"></div>
+    </div>
+  </div>
+</div>
+
+<script>
+(() => {
+  // -----------------------------
+  // Premium board (standard Scrabble)
+  // -----------------------------
+  const PREMIUM = [
+    ["TW","","","DL","","","","TW","","","","DL","","","TW"],
+    ["","DW","","","","TL","","","","TL","","","","DW",""],
+    ["","","DW","","","","DL","","DL","","","","DW","",""],
+    ["DL","","","DW","","","","DL","","","","DW","","","DL"],
+    ["","","","","DW","","","","","","DW","","","",""],
+    ["","TL","","","","TL","","","","TL","","","","TL",""],
+    ["","","DL","","","","DL","","DL","","","","DL","",""],
+    ["TW","","","DL","","","","DW","","","","DL","","","TW"],
+    ["","","DL","","","","DL","","DL","","","","DL","",""],
+    ["","TL","","","","TL","","","","TL","","","","TL",""],
+    ["","","","","DW","","","","","","DW","","","",""],
+    ["DL","","","DW","","","","DL","","","","DW","","","DL"],
+    ["","","DW","","","","DL","","DL","","","","DW","",""],
+    ["","DW","","","","TL","","","","TL","","","","DW",""],
+    ["TW","","","DL","","","","TW","","","","DL","","","TW"],
+  ];
+
+  function letterMul(p){ return (p==="DL")?2 : (p==="TL")?3 : 1; }
+  function wordMul(p){ return (p==="DW")?2 : (p==="TW")?3 : 1; }
+
+  // -----------------------------
+  // Tiles (English Scrabble distribution)
+  // -----------------------------
+  const TILE_INFO = [
+    ["A",9,1], ["B",2,3], ["C",2,3], ["D",4,2], ["E",12,1], ["F",2,4], ["G",3,2],
+    ["H",2,4], ["I",9,1], ["J",1,8], ["K",1,5], ["L",4,1], ["M",2,3], ["N",6,1],
+    ["O",8,1], ["P",2,3], ["Q",1,10],["R",6,1], ["S",4,1], ["T",6,1], ["U",4,1],
+    ["V",2,4], ["W",2,4], ["X",1,8], ["Y",2,4], ["Z",1,10], ["_",2,0],
+  ];
+  const VALUE = Object.fromEntries(TILE_INFO.map(([L,_,v]) => [L,v]));
+
+  // A tiny rack-leave heuristic so CPU doesn't always dump synergy.
+  // Positive = good to keep, negative = bad to keep.
+  const LEAVE = {
+    "E":0.5,"A":0.3,"I":0.2,"O":0.2,"U":0.1,
+    "R":0.3,"S":0.35,"T":0.25,"N":0.2,"L":0.15,"D":0.05,
+    "G":0.05,"M":0.05,"H":-0.05,"C":-0.05,"P":-0.1,
+    "B":-0.15,"F":-0.2,"V":-0.35,"W":-0.3,"Y":-0.15,
+    "K":-0.4,"J":-0.7,"X":-0.4,"Z":-0.5,"Q":-1.2,"_":0.0
+  };
+
+  // -----------------------------
+  // DOM
+  // -----------------------------
+  const $board = document.getElementById("board");
+  const $rack = document.getElementById("rack");
+  const $status = document.getElementById("statusLine");
+  const $toast = document.getElementById("toast");
+  const $log = document.getElementById("log");
+  const $scoreHuman = document.getElementById("scoreHuman");
+  const $scoreAI = document.getElementById("scoreAI");
+  const $tilesLeft = document.getElementById("tilesLeft");
+  const $btnPlay = document.getElementById("btnPlay");
+  const $btnShuffle = document.getElementById("btnShuffle");
+  const $btnExchange = document.getElementById("btnExchange");
+  const $btnPass = document.getElementById("btnPass");
+  const $btnNew = document.getElementById("btnNew");
+  const $turnTxt = document.getElementById("turnTxt");
+  const $turnDot = document.getElementById("turnDot");
+  const $modeTxt = document.getElementById("modeTxt");
+
+  // -----------------------------
+  // State
+  // -----------------------------
+  const SIZE = 15;
+  const CENTER = {r:7,c:7};
+
+  let dictSet = null;
+  let wordsByLen = Array.from({length: 16}, () => []);
+  let posIndex = Array.from({length: 16}, () => null); // posIndex[L][pos][ch] -> array of indices into wordsByLen[L]
+
+  let board = null; // 15x15 of {tile|null, prem}
+  let bag = [];
+  let humanRack = [];
+  let aiRack = [];
+  let scoreHuman = 0;
+  let scoreAI = 0;
+  let current = "HUMAN"; // HUMAN or AI
+  let gameOver = false;
+  let passesInRow = 0;
+
+  // pending placements (human)
+  // key "r,c" => tile object
+  let pending = new Map();
+  let selectedRackIndex = null;
+  let mode = "PLAY"; // PLAY or EXCHANGE
+  let exchangeSel = new Set(); // indices in rack
+
+  // -----------------------------
+  // Helpers
+  // -----------------------------
+  function toast(msg, ok=true){
+    $toast.textContent = msg || "";
+    $toast.style.color = ok ? "var(--muted)" : "var(--danger)";
+    if(msg){
+      setTimeout(() => { if($toast.textContent===msg) $toast.textContent=""; }, 2500);
+    }
+  }
+  function log(msg){
+    const t = new Date().toLocaleTimeString([], {hour:"2-digit", minute:"2-digit"});
+    $log.textContent = `[${t}] ${msg}\n` + $log.textContent;
+  }
+  function inBounds(r,c){ return r>=0 && r<SIZE && c>=0 && c<SIZE; }
+  function keyOf(r,c){ return `${r},${c}`; }
+
+  function shuffle(arr){
+    for(let i=arr.length-1;i>0;i--){
+      const j = (Math.random()*(i+1))|0;
+      [arr[i],arr[j]] = [arr[j],arr[i]];
+    }
+    return arr;
+  }
+
+  function cloneTile(t){
+    return { letter:t.letter, value:t.value, isBlank:t.isBlank, id:t.id };
+  }
+
+  function tileFromLetter(L){
+    if(L === "_") return {letter:"_", value:0, isBlank:true, id: crypto.randomUUID()};
+    return {letter:L, value:VALUE[L], isBlank:false, id: crypto.randomUUID()};
+  }
+
+  function buildBag(){
+    const tiles = [];
+    for(const [L,count,val] of TILE_INFO){
+      for(let i=0;i<count;i++){
+        tiles.push({letter:L, value:val, isBlank:(L==="_"), id: crypto.randomUUID()});
+      }
+    }
+    return shuffle(tiles);
+  }
+
+  function drawTiles(rack, n){
+    while(n>0 && bag.length>0 && rack.length<7){
+      rack.push(bag.pop());
+      n--;
+    }
+  }
+
+  function initBoard(){
+    const b = [];
+    for(let r=0;r<SIZE;r++){
+      const row = [];
+      for(let c=0;c<SIZE;c++){
+        row.push({ tile:null, prem: PREMIUM[r][c] || "" });
+      }
+      b.push(row);
+    }
+    return b;
+  }
+
+  function isBoardEmpty(){
+    for(let r=0;r<SIZE;r++){
+      for(let c=0;c<SIZE;c++){
+        if(board[r][c].tile) return false;
+      }
+    }
+    return true;
+  }
+
+  function getCellTile(r,c){
+    if(!inBounds(r,c)) return null;
+    const k = keyOf(r,c);
+    if(pending.has(k)) return pending.get(k);
+    return board[r][c].tile;
+  }
+
+  function getCellLetter(r,c){
+    const t = getCellTile(r,c);
+    return t ? t.letter : null;
+  }
+
+  function neighbors(r,c){
+    return [
+      [r-1,c],[r+1,c],[r,c-1],[r,c+1]
+    ].filter(([rr,cc])=>inBounds(rr,cc));
+  }
+
+  function computeAnchors(){
+    const anchors = Array.from({length:SIZE},()=>Array(SIZE).fill(false));
+    if(isBoardEmpty()){
+      anchors[CENTER.r][CENTER.c] = true;
+      return anchors;
+    }
+    for(let r=0;r<SIZE;r++){
+      for(let c=0;c<SIZE;c++){
+        if(board[r][c].tile) continue;
+        for(const [rr,cc] of neighbors(r,c)){
+          if(board[rr][cc].tile){
+            anchors[r][c] = true; break;
+          }
+        }
+      }
+    }
+    return anchors;
+  }
+
+  function computeCrossMasks(){
+    // crossH[r][c]: allowed letters if placing H at (r,c) (so we validate vertical cross word)
+    // crossV[r][c]: allowed letters if placing V at (r,c) (validate horizontal cross word)
+    const all = (1<<26)-1;
+    const crossH = Array.from({length:SIZE},()=>Array(SIZE).fill(0));
+    const crossV = Array.from({length:SIZE},()=>Array(SIZE).fill(0));
+
+    for(let r=0;r<SIZE;r++){
+      for(let c=0;c<SIZE;c++){
+        if(board[r][c].tile) continue;
+
+        // vertical word around (r,c)
+        let up = "";
+        for(let rr=r-1; rr>=0 && board[rr][c].tile; rr--) up = board[rr][c].tile.letter + up;
+        let down = "";
+        for(let rr=r+1; rr<SIZE && board[rr][c].tile; rr++) down += board[rr][c].tile.letter;
+
+        if(up==="" && down===""){
+          crossH[r][c] = all;
+        }else{
+          let mask = 0;
+          for(let i=0;i<26;i++){
+            const ch = String.fromCharCode(65+i);
+            const w = up + ch + down;
+            if(dictSet.has(w)) mask |= (1<<i);
+          }
+          crossH[r][c] = mask;
+        }
+
+        // horizontal word around (r,c)
+        let left = "";
+        for(let cc=c-1; cc>=0 && board[r][cc].tile; cc--) left = board[r][cc].tile.letter + left;
+        let right = "";
+        for(let cc=c+1; cc<SIZE && board[r][cc].tile; cc++) right += board[r][cc].tile.letter;
+
+        if(left==="" && right===""){
+          crossV[r][c] = all;
+        }else{
+          let mask = 0;
+          for(let i=0;i<26;i++){
+            const ch = String.fromCharCode(65+i);
+            const w = left + ch + right;
+            if(dictSet.has(w)) mask |= (1<<i);
+          }
+          crossV[r][c] = mask;
+        }
+      }
+    }
+    return {crossH, crossV};
+  }
+
+  function rackCounts(rack){
+    const cnt = new Array(26).fill(0);
+    let blanks = 0;
+    for(const t of rack){
+      if(t.letter === "_") blanks++;
+      else cnt[t.letter.charCodeAt(0)-65]++;
+    }
+    return {cnt, blanks};
+  }
+
+  function canPayLetters(needCnt, needBlanks, rackCnt){
+    // needCnt: Array26 counts for actual letters, needBlanks not used here (we'll handle below)
+    // rackCnt: {cnt, blanks}
+    let blanks = rackCnt.blanks;
+    for(let i=0;i<26;i++){
+      const have = rackCnt.cnt[i];
+      const need = needCnt[i];
+      if(need <= have) continue;
+      const extra = need - have;
+      blanks -= extra;
+      if(blanks < 0) return false;
+    }
+    return true;
+  }
+
+  function buildWordFromLine(startR, startC, dr, dc){
+    // assumes (startR,startC) is within the word; extends backward then forward using current board+pending
+    let r=startR, c=startC;
+    while(inBounds(r-dr,c-dc) && getCellTile(r-dr,c-dc)) { r-=dr; c-=dc; }
+    let word = "";
+    const cells = [];
+    while(inBounds(r,c) && getCellTile(r,c)){
+      word += getCellTile(r,c).letter;
+      cells.push([r,c]);
+      r+=dr; c+=dc;
+    }
+    return {word, cells};
+  }
+
+  function isMoveConnected(newTiles){
+    if(isBoardEmpty()){
+      // must cover center
+      for(const {r,c} of newTiles){
+        if(r===CENTER.r && c===CENTER.c) return true;
+      }
+      return false;
+    }
+    for(const {r,c} of newTiles){
+      for(const [rr,cc] of neighbors(r,c)){
+        if(board[rr][cc].tile) return true;
+      }
+    }
+    // also connected if main word includes existing tiles, but if newTiles are in line with existing letters, adjacency will happen anyway.
+    return false;
+  }
+
+  function validateHumanPending(){
+    const newTiles = [];
+    for(const [k,t] of pending){
+      const [r,c] = k.split(",").map(Number);
+      newTiles.push({r,c,tile:t});
+    }
+    if(newTiles.length===0){
+      return {ok:false, msg:"No tiles placed. Use Pass/Exchange instead."};
+    }
+
+    // Determine orientation
+    let allR = newTiles.every(x=>x.r===newTiles[0].r);
+    let allC = newTiles.every(x=>x.c===newTiles[0].c);
+    let dir = null;
+    if(newTiles.length===1){
+      // orientation inferred by adjacency if possible; default horizontal
+      dir = "H";
+    }else{
+      if(!allR && !allC) return {ok:false, msg:"Tiles must be in one row or one column."};
+      dir = allR ? "H" : "V";
+    }
+
+    // Ensure no overlap with existing
+    for(const {r,c} of newTiles){
+      if(board[r][c].tile) return {ok:false, msg:"You placed on an occupied square."};
+    }
+
+    // Check contiguity (no gaps between extremes)
+    if(dir==="H"){
+      const r = newTiles[0].r;
+      const cols = newTiles.map(x=>x.c);
+      const minC = Math.min(...cols), maxC = Math.max(...cols);
+      for(let c=minC;c<=maxC;c++){
+        if(!getCellTile(r,c)) return {ok:false, msg:"Your word has a gap. Fill all squares between."};
+      }
+    }else{
+      const c = newTiles[0].c;
+      const rows = newTiles.map(x=>x.r);
+      const minR = Math.min(...rows), maxR = Math.max(...rows);
+      for(let r=minR;r<=maxR;r++){
+        if(!getCellTile(r,c)) return {ok:false, msg:"Your word has a gap. Fill all squares between."};
+      }
+    }
+
+    // First move must cover center
+    if(isBoardEmpty()){
+      let covers = newTiles.some(x=>x.r===CENTER.r && x.c===CENTER.c);
+      if(!covers) return {ok:false, msg:"First move must cover the center star."};
+    }
+
+    // Must connect to existing tiles if not first move
+    if(!isMoveConnected(newTiles)){
+      return {ok:false, msg:"Move must touch existing tiles."};
+    }
+
+    // Build main word from any one new tile
+    const seed = newTiles[0];
+    const dr = (dir==="V")?1:0;
+    const dc = (dir==="H")?1:0;
+    const main = buildWordFromLine(seed.r, seed.c, dr, dc);
+    if(main.word.length < 2) return {ok:false, msg:"Move must create a word of length ≥ 2."};
+    if(!dictSet.has(main.word)) return {ok:false, msg:`Main word not in dictionary: ${main.word}`};
+
+    // Validate cross words
+    const madeWords = new Set([main.word]);
+    for(const {r,c} of newTiles){
+      const cross = buildWordFromLine(r,c, dc, dr); // perpendicular
+      if(cross.word.length>=2){
+        if(!dictSet.has(cross.word)) return {ok:false, msg:`Invalid cross word: ${cross.word}`};
+        madeWords.add(cross.word);
+      }
+    }
+
+    // Score
+    const score = scoreMove(newTiles, dir);
+    return {ok:true, dir, newTiles, score, words:[...madeWords]};
+  }
+
+  function scoreMove(newTiles, dir){
+    // newTiles: [{r,c,tile}]
+    const newSet = new Set(newTiles.map(x=>keyOf(x.r,x.c)));
+    const dr = (dir==="V")?1:0;
+    const dc = (dir==="H")?1:0;
+
+    // main word cells
+    const seed = newTiles[0];
+    const main = buildWordFromLine(seed.r, seed.c, dr, dc);
+
+    // Main word score
+    let sum = 0;
+    let wMult = 1;
+    for(const [r,c] of main.cells){
+      const t = getCellTile(r,c);
+      const isNew = newSet.has(keyOf(r,c));
+      const prem = board[r][c].prem;
+      const lm = isNew ? letterMul(prem) : 1;
+      const wm = isNew ? wordMul(prem) : 1;
+      sum += (t.value * lm);
+      wMult *= wm;
+    }
+    let total = sum * wMult;
+
+    // Cross word scores
+    for(const {r,c} of newTiles){
+      const cross = buildWordFromLine(r,c, dc, dr);
+      if(cross.word.length>=2){
+        let s = 0;
+        let wm = 1;
+        for(const [rr,cc] of cross.cells){
+          const t = getCellTile(rr,cc);
+          const isThisNew = (rr===r && cc===c);
+          const prem = board[rr][cc].prem;
+          const lm = isThisNew ? letterMul(prem) : 1;
+          const w = isThisNew ? wordMul(prem) : 1;
+          s += (t.value * lm);
+          wm *= w;
+        }
+        total += s * wm;
+      }
+    }
+
+    // Bingo
+    if(newTiles.length === 7) total += 50;
+    return total;
+  }
+
+  function commitHumanMove(result){
+    // place pending tiles onto board
+    for(const {r,c,tile} of result.newTiles){
+      board[r][c].tile = tile;
+    }
+    pending.clear();
+    selectedRackIndex = null;
+    exchangeSel.clear();
+
+    scoreHuman += result.score;
+    passesInRow = 0;
+    drawTiles(humanRack, 7);
+
+    log(`You played ${result.words[0]} (+${result.score}). Words: ${result.words.join(", ")}`);
+    nextTurn();
+  }
+
+  function commitAIMove(move){
+    for(const p of move.placements){
+      board[p.r][p.c].tile = p.tile;
+    }
+    scoreAI += move.score;
+    passesInRow = 0;
+    drawTiles(aiRack, 7);
+
+    log(`CPU played ${move.mainWord} (+${move.score}).`);
+    nextTurn();
+  }
+
+  function endGame(reason){
+    gameOver = true;
+    current = "DONE";
+    // Endgame scoring
+    const humanLeft = humanRack.reduce((s,t)=>s+t.value,0);
+    const aiLeft = aiRack.reduce((s,t)=>s+t.value,0);
+
+    // Standard: subtract remaining tiles; if someone went out, they get opponent's remainder too.
+    // We'll do: both subtract; if reason says who went out, add opponent remainder.
+    scoreHuman -= humanLeft;
+    scoreAI -= aiLeft;
+
+    if(reason === "HUMAN_OUT"){
+      scoreHuman += aiLeft;
+    }else if(reason === "AI_OUT"){
+      scoreAI += humanLeft;
+    }
+
+    render();
+    const winner = (scoreHuman>scoreAI) ? "You win" : (scoreAI>scoreHuman) ? "CPU wins" : "Tie";
+    log(`Game over (${reason}). ${winner}. Final: You ${scoreHuman}, CPU ${scoreAI}.`);
+    toast(`Game over. ${winner}.`, true);
+  }
+
+  function checkEndConditions(){
+    // If bag empty and someone has no tiles
+    if(bag.length===0){
+      if(humanRack.length===0) return endGame("HUMAN_OUT");
+      if(aiRack.length===0) return endGame("AI_OUT");
+    }
+    // Too many passes ends
+    if(passesInRow >= 6){
+      return endGame("PASSES");
+    }
+  }
+
+  // -----------------------------
+  // Rendering
+  // -----------------------------
+  function renderBoard(){
+    $board.innerHTML = "";
+    for(let r=0;r<SIZE;r++){
+      for(let c=0;c<SIZE;c++){
+        const sq = document.createElement("div");
+        sq.className = "sq";
+        sq.dataset.r = r;
+        sq.dataset.c = c;
+        sq.dataset.prem = board[r][c].prem;
+
+        const prem = board[r][c].prem;
+        if(prem){
+          const t = document.createElement("div");
+          t.className = "premTxt";
+          t.textContent = prem;
+          sq.appendChild(t);
+        }
+        if(r===CENTER.r && c===CENTER.c && !board[r][c].tile){
+          const star = document.createElement("div");
+          star.className = "centerStar";
+          star.textContent = "★";
+          sq.appendChild(star);
+        }
+
+        const k = keyOf(r,c);
+        const pendingTile = pending.get(k);
+        const placed = board[r][c].tile;
+
+        const tile = pendingTile || placed;
+        if(tile){
+          const t = document.createElement("div");
+          t.className = "tile" + (tile.isBlank ? " blank" : "");
+          t.textContent = (tile.letter === "_" ? "?" : tile.letter);
+          const pts = document.createElement("div");
+          pts.className = "pts";
+          pts.textContent = tile.value ? tile.value : "";
+          t.appendChild(pts);
+          if(pendingTile) t.classList.add("pendingOutline");
+          sq.appendChild(t);
+        }
+
+        sq.addEventListener("click", onBoardClick);
+        $board.appendChild(sq);
+      }
+    }
+  }
+
+  function renderRack(){
+    $rack.innerHTML = "";
+    humanRack.forEach((t, idx) => {
+      const el = document.createElement("div");
+      el.className = "rackTile" + (t.isBlank ? " blank" : "");
+      el.textContent = (t.letter === "_" ? "?" : t.letter);
+      const pts = document.createElement("div");
+      pts.className = "pts";
+      pts.textContent = t.value ? t.value : "";
+      el.appendChild(pts);
+
+      if(mode==="PLAY" && selectedRackIndex===idx) el.classList.add("sel");
+      if(mode==="EXCHANGE" && exchangeSel.has(idx)) el.classList.add("exSel");
+
+      el.addEventListener("click", () => onRackClick(idx));
+      $rack.appendChild(el);
+    });
+  }
+
+  function render(){
+    $scoreHuman.textContent = scoreHuman;
+    $scoreAI.textContent = scoreAI;
+    $tilesLeft.textContent = bag.length;
+
+    $modeTxt.textContent = mode==="PLAY" ? "Play" : "Exchange";
+    if(gameOver){
+      $turnTxt.textContent = "Game over";
+      $turnDot.className = "dot bad";
+    }else if(current==="HUMAN"){
+      $turnTxt.textContent = "Your turn";
+      $turnDot.className = "dot ok";
+    }else{
+      $turnTxt.textContent = "CPU thinking…";
+      $turnDot.className = "dot wait";
+    }
+
+    const canAct = (!gameOver && current==="HUMAN");
+    $btnPlay.disabled = !canAct || pending.size===0 || mode!=="PLAY";
+    $btnShuffle.disabled = !canAct || mode!=="PLAY";
+    $btnPass.disabled = !canAct;
+    $btnExchange.disabled = !canAct;
+
+    renderBoard();
+    renderRack();
+  }
+
+  // -----------------------------
+  // UI interactions
+  // -----------------------------
+  function onRackClick(idx){
+    if(gameOver || current!=="HUMAN") return;
+
+    if(mode==="PLAY"){
+      if(selectedRackIndex===idx) selectedRackIndex = null;
+      else selectedRackIndex = idx;
+      render();
+      return;
+    }
+
+    if(mode==="EXCHANGE"){
+      if(exchangeSel.has(idx)) exchangeSel.delete(idx);
+      else exchangeSel.add(idx);
+      render();
+      return;
+    }
+  }
+
+  function onBoardClick(e){
+    if(gameOver || current!=="HUMAN") return;
+    if(mode!=="PLAY") return;
+
+    const r = Number(e.currentTarget.dataset.r);
+    const c = Number(e.currentTarget.dataset.c);
+    const k = keyOf(r,c);
+
+    if(board[r][c].tile){
+      // can't edit placed tiles
+      return;
+    }
+
+    if(pending.has(k)){
+      // remove pending tile back to rack (append)
+      const t = pending.get(k);
+      pending.delete(k);
+      humanRack.push(t);
+      selectedRackIndex = null;
+      render();
+      return;
+    }
+
+    if(selectedRackIndex===null) return;
+    if(selectedRackIndex<0 || selectedRackIndex>=humanRack.length) return;
+
+    const t = humanRack.splice(selectedRackIndex, 1)[0];
+    selectedRackIndex = null;
+
+    // if blank, ask for letter now
+    if(t.letter === "_"){
+      let chosen = prompt("Blank tile: choose letter A–Z").toUpperCase().trim();
+      if(!/^[A-Z]$/.test(chosen)){
+        // cancel -> return tile
+        humanRack.push(t);
+        toast("Blank placement cancelled.", false);
+        render();
+        return;
+      }
+      t.letter = chosen;
+      t.isBlank = true;
+      t.value = 0;
+    }
+
+    pending.set(k, t);
+    render();
+  }
+
+  $btnShuffle.addEventListener("click", () => {
+    if(gameOver || current!=="HUMAN" || mode!=="PLAY") return;
+    shuffle(humanRack);
+    selectedRackIndex = null;
+    render();
+  });
+
+  $btnPlay.addEventListener("click", () => {
+    if(gameOver || current!=="HUMAN" || mode!=="PLAY") return;
+    const res = validateHumanPending();
+    if(!res.ok){
+      toast(res.msg, false);
+      return;
+    }
+    commitHumanMove(res);
+  });
+
+  $btnPass.addEventListener("click", () => {
+    if(gameOver || current!=="HUMAN") return;
+    if(pending.size>0){
+      toast("Remove placed tiles before passing.", false);
+      return;
+    }
+    // exit exchange mode if active
+    mode = "PLAY";
+    exchangeSel.clear();
+    selectedRackIndex = null;
+
+    passesInRow++;
+    log("You passed.");
+    nextTurn();
+  });
+
+  $btnExchange.addEventListener("click", () => {
+    if(gameOver || current!=="HUMAN") return;
+    if(pending.size>0){
+      toast("Finish or undo your move before exchanging.", false);
+      return;
+    }
+    if(bag.length < 7){
+      toast("You can only exchange when 7+ tiles remain in the bag.", false);
+      return;
+    }
+
+    if(mode==="PLAY"){
+      mode = "EXCHANGE";
+      exchangeSel.clear();
+      selectedRackIndex = null;
+      toast("Select rack tiles to exchange, then click Exchange again.");
+      render();
+      return;
+    }
+
+    // mode === EXCHANGE: execute
+    if(exchangeSel.size===0){
+      mode = "PLAY";
+      toast("Exchange cancelled.");
+      render();
+      return;
+    }
+
+    const take = [...exchangeSel].sort((a,b)=>b-a).map(i => humanRack.splice(i,1)[0]);
+    exchangeSel.clear();
+    mode = "PLAY";
+
+    // put exchanged tiles back to bag and reshuffle
+    bag.push(...take);
+    shuffle(bag);
+
+    // draw replacements
+    drawTiles(humanRack, 7);
+
+    passesInRow++;
+    log(`You exchanged ${take.length} tile(s).`);
+    nextTurn();
+  });
+
+  $btnNew.addEventListener("click", () => {
+    startNewGame();
+  });
+
+  // -----------------------------
+  // Turn flow
+  // -----------------------------
+  function nextTurn(){
+    checkEndConditions();
+    if(gameOver) return;
+
+    current = (current==="HUMAN") ? "AI" : "HUMAN";
+    pending.clear();
+    selectedRackIndex = null;
+    mode = "PLAY";
+    exchangeSel.clear();
+
+    render();
+
+    if(current==="AI"){
+      // small delay so UI updates
+      setTimeout(aiTurn, 50);
+    }
+  }
+
+  // -----------------------------
+  // CPU AI
+  // -----------------------------
+  function aiTurn(){
+    if(gameOver || current!=="AI") return;
+
+    const startTime = performance.now();
+    const anchors = computeAnchors();
+    const {crossH, crossV} = computeCrossMasks();
+
+    const move = findBestAIMove(aiRack, anchors, crossH, crossV, startTime);
+
+    if(!move){
+      // exchange if possible and rack is ugly; else pass
+      if(bag.length>=7){
+        // swap up to 3 worst leaves
+        const scored = aiRack.map((t,i)=>({i, bad:(LEAVE[t.letter] ?? 0) - (t.value*0.02)}));
+        scored.sort((a,b)=>a.bad-b.bad);
+        const k = Math.min(3, scored.length);
+        const idxs = scored.slice(0,k).map(x=>x.i).sort((a,b)=>b-a);
+        const tossed = idxs.map(i=>aiRack.splice(i,1)[0]);
+        bag.push(...tossed);
+        shuffle(bag);
+        drawTiles(aiRack, 7);
+        passesInRow++;
+        log(`CPU exchanged ${tossed.length} tile(s).`);
+      }else{
+        passesInRow++;
+        log("CPU passed.");
+      }
+      nextTurn();
+      return;
+    }
+
+    // Remove used tiles from aiRack
+    // (match by id)
+    const usedIds = new Set(move.usedTileIds);
+    aiRack = aiRack.filter(t => !usedIds.has(t.id));
+
+    commitAIMove(move);
+  }
+
+  function findBestAIMove(rack, anchors, crossH, crossV, startTime){
+    // Strategy:
+    // 1) Search "hook" moves that share at least one existing board letter (pivot).
+    // 2) Fallback: if board empty, just best rack word through center.
+    // 3) Small time limit to keep UI snappy.
+    const TIME_BUDGET_MS = 900; // crank this up if you want stronger AI and can tolerate delay
+
+    if(isBoardEmpty()){
+      return findBestFirstMove(rack);
+    }
+
+    const rackCnt = rackCounts(rack);
+    let best = null;
+
+    // Gather pivot cells (occupied)
+    const pivots = [];
+    for(let r=0;r<SIZE;r++){
+      for(let c=0;c<SIZE;c++){
+        if(board[r][c].tile) pivots.push([r,c, board[r][c].tile.letter]);
+      }
+    }
+
+    // Evaluate placements that include a pivot for both directions
+    for(const dir of ["H","V"]){
+      const dr = (dir==="V")?1:0;
+      const dc = (dir==="H")?1:0;
+      const crossMaskGrid = (dir==="H") ? crossH : crossV;
+
+      for(const [pr,pc,plet] of pivots){
+        // Quick skip: if along this direction there is no empty cell near pivot, many placements will be dead.
+        let hasSpace = false;
+        for(let step=1; step<=7; step++){
+          const r1 = pr - dr*step, c1 = pc - dc*step;
+          const r2 = pr + dr*step, c2 = pc + dc*step;
+          if(inBounds(r1,c1) && !board[r1][c1].tile) { hasSpace=true; break; }
+          if(inBounds(r2,c2) && !board[r2][c2].tile) { hasSpace=true; break; }
+        }
+        if(!hasSpace) continue;
+
+        const lineFixed = (dir==="H")
+          ? (idx) => board[pr][idx].tile ? board[pr][idx].tile.letter : null
+          : (idx) => board[idx][pc].tile ? board[idx][pc].tile.letter : null;
+
+        // try all start/end windows that include pivot and have <=7 empties
+        const pivotPos = (dir==="H") ? pc : pr;
+
+        for(let start=0; start<SIZE; start++){
+          for(let end=start+1; end<SIZE; end++){
+            const L = end-start+1;
+            if(L<2 || L>15) continue;
+
+            // must include pivot
+            if(!(start<=pivotPos && pivotPos<=end)) continue;
+
+            // boundary must be empty/outside to avoid extending
+            if(start>0 && lineFixed(start-1)) continue;
+            if(end<SIZE-1 && lineFixed(end+1)) continue;
+
+            // count empties and fixed positions
+            let empties = 0;
+            const fixed = []; // [offset, letter]
+            let includesAnchorEmpty = false;
+
+            for(let pos=start; pos<=end; pos++){
+              const Ltr = lineFixed(pos);
+              const offset = pos-start;
+              if(Ltr){
+                fixed.push([offset, Ltr]);
+              }else{
+                empties++;
+                // does this empty square touch existing? anchor grid is global
+                const rr = (dir==="H") ? pr : pos;
+                const cc = (dir==="H") ? pos : pc;
+                if(anchors[rr][cc]) includesAnchorEmpty = true;
+              }
+            }
+
+            // must place at least one tile and cannot exceed rack
+            if(empties===0 || empties>7) continue;
+
+            // must touch via anchors (safety): some plays might only share letters and no anchor empties, but those are still connected.
+            // We'll allow either: (a) has at least one empty anchor, or (b) window includes existing tiles (it does).
+            // So no extra condition here.
+
+            // Choose smallest candidate list among fixed positions for indexing
+            let candidateList = null;
+            if(fixed.length>0){
+              let bestFixed = null;
+              let bestSize = Infinity;
+              for(const [off,ch] of fixed){
+                const arr = posIndex[L]?.[off]?.[ch.charCodeAt(0)-65];
+                if(!arr || arr.length===0){ bestSize = 0; bestFixed = null; break; }
+                if(arr.length < bestSize){
+                  bestSize = arr.length;
+                  bestFixed = [off,ch,arr];
+                }
+              }
+              if(!bestFixed) continue;
+              candidateList = bestFixed[2];
+            }else{
+              // no fixed letters in window -> skip in hook-search
+              continue;
+            }
+
+            // Iterate candidates
+            for(const idx of candidateList){
+              if(performance.now() - startTime > TIME_BUDGET_MS) return best;
+
+              const w = wordsByLen[L][idx];
+
+              // verify all fixed letters match
+              let ok = true;
+              for(const [off,ch] of fixed){
+                if(w[off] !== ch){ ok=false; break; }
+              }
+              if(!ok) continue;
+
+              // verify placement legality: cross masks, anchors, and rack payment
+              const need = new Array(26).fill(0);
+              const placements = [];
+              const usedTileIds = [];
+              let localBlanks = rackCnt.blanks;
+              const localCnt = rackCnt.cnt.slice();
+
+              for(let pos=start; pos<=end; pos++){
+                const offset = pos-start;
+                const ch = w[offset];
+                const Ltr = lineFixed(pos);
+
+                const rr = (dir==="H") ? pr : pos;
+                const cc = (dir==="H") ? pos : pc;
+
+                if(Ltr){
+                  // fixed square
+                  continue;
+                }else{
+                  // check cross constraint
+                  const mask = crossMaskGrid[rr][cc];
+                  const bit = 1<<(ch.charCodeAt(0)-65);
+                  if((mask & bit)===0){ ok=false; break; }
+
+                  // pay from rack (prefer exact letter)
+                  const li = ch.charCodeAt(0)-65;
+                  if(localCnt[li] > 0){
+                    localCnt[li]--;
+                    // take an actual tile object from rack later; record letter needed now
+                    placements.push({r:rr,c:cc, letter:ch, useBlank:false});
+                  }else if(localBlanks > 0){
+                    localBlanks--;
+                    placements.push({r:rr,c:cc, letter:ch, useBlank:true});
+                  }else{
+                    ok=false; break;
+                  }
+                }
+              }
+              if(!ok) continue;
+
+              // must cover at least one anchor empty square (real Scrabble connectivity via touch/cross)
+              // If it shares letters only, it's still connected, but typically it will also be anchored.
+              // We'll enforce: at least one newly placed tile is on an anchor square.
+              if(!placements.some(p => anchors[p.r][p.c])) continue;
+
+              // Build actual tile objects from rack to place
+              // (we choose tiles to match letters; blanks become chosen letter)
+              const rackCopy = rack.map(t => t);
+              const finalPlacements = [];
+              for(const p of placements){
+                if(!p.useBlank){
+                  const j = rackCopy.findIndex(t => t.letter===p.letter);
+                  if(j<0){ ok=false; break; }
+                  const tile = rackCopy.splice(j,1)[0];
+                  finalPlacements.push({r:p.r,c:p.c,tile:cloneTile(tile)});
+                  usedTileIds.push(tile.id);
+                }else{
+                  const j = rackCopy.findIndex(t => t.letter==="_");
+                  if(j<0){ ok=false; break; }
+                  const tile = rackCopy.splice(j,1)[0];
+                  const t2 = cloneTile(tile);
+                  t2.letter = p.letter;
+                  t2.isBlank = true;
+                  t2.value = 0;
+                  finalPlacements.push({r:p.r,c:p.c,tile:t2});
+                  usedTileIds.push(tile.id);
+                }
+              }
+              if(!ok) continue;
+
+              // Temporarily apply for scoring and cross-word validation safety:
+              // (cross masks guarantee perpendicular words are valid, and main word is from dict)
+              // Still, we need to ensure we didn't create a 1-letter-only move; anchor rule already prevents that.
+              // Compute score by simulating pending tiles in a temporary way:
+              const tempKeys = [];
+              for(const fp of finalPlacements){
+                const k = keyOf(fp.r,fp.c);
+                pending.set(k, fp.tile); // reuse pending as scratch
+                tempKeys.push(k);
+              }
+
+              const score = scoreMove(finalPlacements.map(p => ({r:p.r,c:p.c,tile:p.tile})), dir);
+
+              // cleanup scratch
+              for(const k of tempKeys) pending.delete(k);
+
+              // rack leave heuristic
+              const leave = rackCopy.reduce((s,t)=>s+(LEAVE[t.letter] ?? 0), 0);
+              const totalScore = score + leave;
+
+              if(!best || totalScore > best.totalScore){
+                best = {
+                  dir,
+                  placements: finalPlacements,
+                  score,
+                  totalScore,
+                  mainWord: w,
+                  usedTileIds
+                };
+              }
+            }
+          }
+        }
+      }
+    }
+
+    // Fallback: try parallel/adjacent plays from anchors using rack-only words (shorter).
+    // This helps avoid CPU "stuck" when best is a parallel move.
+    if(!best){
+      best = findAnchorRackPlay(rack, anchors, crossH, crossV, startTime, TIME_BUDGET_MS);
+    }
+
+    return best;
+  }
+
+  function findBestFirstMove(rack){
+    // Place the best-scoring rack word through center horizontally.
+    const rackCnt = rackCounts(rack);
+    let best = null;
+
+    for(let L=2; L<=7; L++){
+      for(const w of wordsByLen[L]){
+        // can rack pay?
+        const need = new Array(26).fill(0);
+        for(let i=0;i<w.length;i++) need[w.charCodeAt(i)-65]++;
+        if(!canPayLetters(need,0,rackCnt)) continue;
+
+        // choose placement so it covers center: startC = centerC - k
+        for(let k=0;k<L;k++){
+          const startC = CENTER.c - k;
+          const startR = CENTER.r;
+          if(startC<0 || startC+L>SIZE) continue;
+
+          // Build placements for empty board: all letters are new tiles
+          const rackCopy = rack.map(t => t);
+          const placements = [];
+          const usedTileIds = [];
+
+          let ok = true;
+          for(let i=0;i<L;i++){
+            const ch = w[i];
+            let j = rackCopy.findIndex(t=>t.letter===ch);
+            if(j>=0){
+              const tile = rackCopy.splice(j,1)[0];
+              placements.push({r:startR, c:startC+i, tile:cloneTile(tile)});
+              usedTileIds.push(tile.id);
+            }else{
+              j = rackCopy.findIndex(t=>t.letter==="_");
+              if(j<0){ ok=false; break; }
+              const tile = rackCopy.splice(j,1)[0];
+              const t2 = cloneTile(tile);
+              t2.letter = ch; t2.isBlank = true; t2.value = 0;
+              placements.push({r:startR, c:startC+i, tile:t2});
+              usedTileIds.push(tile.id);
+            }
+          }
+          if(!ok) continue;
+
+          // score on empty board:
+          const tempKeys = [];
+          for(const p of placements){
+            const k2 = keyOf(p.r,p.c);
+            pending.set(k2, p.tile);
+            tempKeys.push(k2);
+          }
+          const score = scoreMove(placements.map(p=>({r:p.r,c:p.c,tile:p.tile})), "H");
+          for(const k2 of tempKeys) pending.delete(k2);
+
+          const leave = rackCopy.reduce((s,t)=>s+(LEAVE[t.letter] ?? 0), 0);
+          const totalScore = score + leave;
+
+          if(!best || totalScore>best.totalScore){
+            best = {dir:"H", placements, score, totalScore, mainWord:w, usedTileIds};
+          }
+        }
+      }
+    }
+
+    return best;
+  }
+
+  function findAnchorRackPlay(rack, anchors, crossH, crossV, startTime, budgetMs){
+    // Consider rack-only words length 2..7 placed through an anchor square (no shared letter required),
+    // validating cross constraints as we go.
+    const rackCnt = rackCounts(rack);
+
+    // Precompute rack-only candidate words (still reasonably small in practice)
+    const rackWords = [];
+    for(let L=2; L<=7; L++){
+      for(const w of wordsByLen[L]){
+        const need = new Array(26).fill(0);
+        for(let i=0;i<L;i++) need[w.charCodeAt(i)-65]++;
+        if(canPayLetters(need,0,rackCnt)) rackWords.push(w);
+      }
+    }
+    // try higher score potential first
+    rackWords.sort((a,b)=>b.length-a.length);
+
+    let best = null;
+
+    for(const dir of ["H","V"]){
+      const dr = (dir==="V")?1:0;
+      const dc = (dir==="H")?1:0;
+      const crossMaskGrid = (dir==="H") ? crossH : crossV;
+
+      // anchors only
+      for(let r=0;r<SIZE;r++){
+        for(let c=0;c<SIZE;c++){
+          if(!anchors[r][c]) continue;
+          if(board[r][c].tile) continue;
+
+          const anchorPos = (dir==="H") ? c : r;
+          const lineIdx = (dir==="H") ? r : c;
+
+          // for each rack word, try placements that include anchor cell
+          for(const w of rackWords){
+            if(performance.now() - startTime > budgetMs) return best;
+
+            const L = w.length;
+            for(let k=0;k<L;k++){
+              const startPos = anchorPos - k;
+              const endPos = startPos + L - 1;
+              if(startPos<0 || endPos>=SIZE) continue;
+
+              // boundary check (no extension)
+              const beforePos = startPos-1;
+              const afterPos = endPos+1;
+              if(beforePos>=0){
+                const br = (dir==="H") ? lineIdx : beforePos;
+                const bc = (dir==="H") ? beforePos : lineIdx;
+                if(board[br][bc].tile) continue;
+              }
+              if(afterPos<SIZE){
+                const ar = (dir==="H") ? lineIdx : afterPos;
+                const ac = (dir==="H") ? afterPos : lineIdx;
+                if(board[ar][ac].tile) continue;
+              }
+
+              // all squares in span must be empty (since it's rack-only play)
+              let ok = true;
+              for(let i=0;i<L;i++){
+                const pos = startPos + i;
+                const rr = (dir==="H") ? lineIdx : pos;
+                const cc = (dir==="H") ? pos : lineIdx;
+                if(board[rr][cc].tile){ ok=false; break; }
+              }
+              if(!ok) continue;
+
+              // cross constraints for each placed tile
+              for(let i=0;i<L;i++){
+                const pos = startPos + i;
+                const rr = (dir==="H") ? lineIdx : pos;
+                const cc = (dir==="H") ? pos : lineIdx;
+                const ch = w[i];
+                const mask = crossMaskGrid[rr][cc];
+                const bit = 1<<(ch.charCodeAt(0)-65);
+                if((mask & bit)===0){ ok=false; break; }
+              }
+              if(!ok) continue;
+
+              // pay tiles from rack
+              const rackCopy = rack.map(t=>t);
+              const placements = [];
+              const usedTileIds = [];
+
+              for(let i=0;i<L;i++){
+                const ch = w[i];
+                let j = rackCopy.findIndex(t=>t.letter===ch);
+                if(j>=0){
+                  const tile = rackCopy.splice(j,1)[0];
+                  const rr = (dir==="H") ? lineIdx : (startPos+i);
+                  const cc = (dir==="H") ? (startPos+i) : lineIdx;
+                  placements.push({r:rr,c:cc,tile:cloneTile(tile)});
+                  usedTileIds.push(tile.id);
+                }else{
+                  j = rackCopy.findIndex(t=>t.letter==="_");
+                  if(j<0){ ok=false; break; }
+                  const tile = rackCopy.splice(j,1)[0];
+                  const t2 = cloneTile(tile);
+                  t2.letter = ch; t2.isBlank = true; t2.value = 0;
+                  const rr = (dir==="H") ? lineIdx : (startPos+i);
+                  const cc = (dir==="H") ? (startPos+i) : lineIdx;
+                  placements.push({r:rr,c:cc,tile:t2});
+                  usedTileIds.push(tile.id);
+                }
+              }
+              if(!ok) continue;
+
+              // scratch-score
+              const tempKeys = [];
+              for(const p of placements){
+                const k2 = keyOf(p.r,p.c);
+                pending.set(k2, p.tile);
+                tempKeys.push(k2);
+              }
+              // main word is rack-only and in dict; cross masks guarantee cross words
+              const score = scoreMove(placements.map(p=>({r:p.r,c:p.c,tile:p.tile})), dir);
+              for(const k2 of tempKeys) pending.delete(k2);
+
+              const leave = rackCopy.reduce((s,t)=>s+(LEAVE[t.letter] ?? 0), 0);
+              const totalScore = score + leave;
+
+              if(!best || totalScore>best.totalScore){
+                best = {dir, placements, score, totalScore, mainWord:w, usedTileIds};
+              }
+            }
+          }
+        }
+      }
+    }
+
+    return best;
+  }
+
+  // -----------------------------
+  // Dictionary loading
+  // -----------------------------
+  async function loadDictionary(){
+    $status.textContent = "Loading csw.txt …";
+    try{
+      const res = await fetch("csw.txt", {cache:"force-cache"});
+      if(!res.ok) throw new Error(`HTTP ${res.status}`);
+      const text = await res.text();
+      const raw = text.split(/\r?\n/);
+
+      const words = [];
+      for(const line of raw){
+        const w = line.trim().toUpperCase();
+        if(!w) continue;
+        if(!/^[A-Z]+$/.test(w)) continue;
+        if(w.length>15) continue; // never playable on 15x15
+        words.push(w);
+      }
+
+      dictSet = new Set(words);
+
+      // bucket by length
+      for(const w of words){
+        wordsByLen[w.length].push(w);
+      }
+
+      // build positional index
+      for(let L=1; L<=15; L++){
+        if(wordsByLen[L].length===0) continue;
+        const idx = Array.from({length:L}, () => Array.from({length:26}, () => []));
+        for(let i=0;i<wordsByLen[L].length;i++){
+          const w = wordsByLen[L][i];
+          for(let p=0;p<L;p++){
+            idx[p][w.charCodeAt(p)-65].push(i);
+          }
+        }
+        posIndex[L] = idx;
+      }
+
+      $status.textContent = `Dictionary ready: ${words.length.toLocaleString()} words (≤15).`;
+      log(`Loaded dictionary with ${words.length.toLocaleString()} words.`);
+    }catch(err){
+      $status.textContent = "Failed to load csw.txt";
+      toast("Could not fetch csw.txt. Put it next to index.html (same folder).", false);
+      console.error(err);
+      throw err;
+    }
+  }
+
+  // -----------------------------
+  // New game
+  // -----------------------------
+  function startNewGame(){
+    if(!dictSet){
+      toast("Dictionary not loaded yet.", false);
+      return;
+    }
+    board = initBoard();
+    bag = buildBag();
+    humanRack = [];
+    aiRack = [];
+    scoreHuman = 0;
+    scoreAI = 0;
+    current = "HUMAN";
+    gameOver = false;
+    passesInRow = 0;
+    pending.clear();
+    selectedRackIndex = null;
+    mode = "PLAY";
+    exchangeSel.clear();
+
+    drawTiles(humanRack, 7);
+    drawTiles(aiRack, 7);
+
+    log("New game started.");
+    render();
+  }
+
+  // -----------------------------
+  // Boot
+  // -----------------------------
+  (async () => {
+    // build blank UI grid now
+    board = initBoard();
+    render();
+
+    await loadDictionary();
+    startNewGame();
+  })();
+
+})();
+</script>
+</body>
+</html>
