@@ -197,7 +197,7 @@
   <div class="top">
     <div class="boardWrap">
       <div class="hdr">
-        <div class="title">Scrabble vs CPU</div>
+        <div class="title">Word vs CPU</div>
         <div class="status" id="statusLine">Loading dictionary…</div>
       </div>
       <div class="board" id="board"></div>
@@ -236,7 +236,7 @@
 <script>
 (() => {
   // -----------------------------
-  // Premium board (standard Scrabble)
+  // Premium board (standard word)
   // -----------------------------
   const PREMIUM = [
     ["TW","","","DL","","","","TW","","","","DL","","","TW"],
@@ -260,7 +260,7 @@
   function wordMul(p){ return (p==="DW")?2 : (p==="TW")?3 : 1; }
 
   // -----------------------------
-  // Tiles (English Scrabble distribution)
+  // Tiles (English word distribution)
   // -----------------------------
   const TILE_INFO = [
     ["A",9,1], ["B",2,3], ["C",2,3], ["D",4,2], ["E",12,1], ["F",2,4], ["G",3,2],
@@ -1200,7 +1200,7 @@
               }
               if(!ok) continue;
 
-              // must cover at least one anchor empty square (real Scrabble connectivity via touch/cross)
+              // must cover at least one anchor empty square (real word connectivity via touch/cross)
               // If it shares letters only, it's still connected, but typically it will also be anchored.
               // We'll enforce: at least one newly placed tile is on an anchor square.
               if(!placements.some(p => anchors[p.r][p.c])) continue;
