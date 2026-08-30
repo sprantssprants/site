@@ -1,0 +1,116 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Flag pedigree</title>
+  <style>
+    html, body, #stage { width: 100%; height: 100%; margin: 0; overflow: hidden; }
+    body { background: #fbfaf6; }
+    #stage { position: relative; cursor: grab; touch-action: none; }
+    #stage.dragging { cursor: grabbing; }
+    #tree {
+      position: absolute;
+      left: 0;
+      top: 0;
+      max-width: none;
+      transform-origin: 0 0;
+      user-select: none;
+      -webkit-user-drag: none;
+    }
+  </style>
+</head>
+<body>
+  <div id="stage">
+    <img id="tree" src="simple_flag_pedigree.svg?v=7" alt="Birthplace-flag pedigree">
+  </div>
+  <script>
+    const stage = document.getElementById('stage');
+    const tree = document.getElementById('tree');
+    let treeWidth = 1;
+    let treeHeight = 1;
+    let x = 0;
+    let y = 0;
+    let scale = 1;
+    let fittedScale = 1;
+    let minimumScale = 0.01;
+    let dragging = false;
+    let lastX = 0;
+    let lastY = 0;
+
+    function draw() {
+      tree.style.transform = `translate(${x}px, ${y}px) scale(${scale})`;
+    }
+
+    function fit() {
+      const padding = 16;
+      const focus = { x: 0, y: 6022, width: 7366, height: 1596 };
+      minimumScale = Math.min(
+        (stage.clientWidth - padding * 2) / treeWidth,
+        (stage.clientHeight - padding * 2) / treeHeight
+      ) * 0.9;
+      fittedScale = Math.min(
+        (stage.clientWidth - padding * 2) / focus.width,
+        (stage.clientHeight - padding * 2) / focus.height
+      );
+      scale = fittedScale;
+      x = (stage.clientWidth - focus.width * scale) / 2 - focus.x * scale;
+      y = (stage.clientHeight - focus.height * scale) / 2 - focus.y * scale;
+      draw();
+    }
+
+    function zoomAt(clientX, clientY, factor) {
+      const next = Math.max(minimumScale, Math.min(8, scale * factor));
+      const worldX = (clientX - x) / scale;
+      const worldY = (clientY - y) / scale;
+      x = clientX - worldX * next;
+      y = clientY - worldY * next;
+      scale = next;
+      draw();
+    }
+
+    stage.addEventListener('wheel', event => {
+      event.preventDefault();
+      const factor = Math.exp(-event.deltaY * 0.00035);
+      zoomAt(event.clientX, event.clientY, factor);
+    }, { passive: false });
+
+    stage.addEventListener('pointerdown', event => {
+      dragging = true;
+      lastX = event.clientX;
+      lastY = event.clientY;
+      stage.classList.add('dragging');
+      stage.setPointerCapture(event.pointerId);
+    });
+
+    stage.addEventListener('pointermove', event => {
+      if (!dragging) return;
+      x += event.clientX - lastX;
+      y += event.clientY - lastY;
+      lastX = event.clientX;
+      lastY = event.clientY;
+      draw();
+    });
+
+    function stopDragging() {
+      dragging = false;
+      stage.classList.remove('dragging');
+    }
+
+    stage.addEventListener('pointerup', stopDragging);
+    stage.addEventListener('pointercancel', stopDragging);
+    stage.addEventListener('dblclick', fit);
+    window.addEventListener('resize', fit);
+    function initializeTree() {
+      treeWidth = tree.naturalWidth;
+      treeHeight = tree.naturalHeight;
+      tree.style.width = `${treeWidth}px`;
+      tree.style.height = `${treeHeight}px`;
+      fit();
+    }
+
+    if (tree.complete) initializeTree();
+    else tree.addEventListener('load', initializeTree);
+  </script>
+</body>
+</html>
