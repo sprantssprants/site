@@ -4,13 +4,44 @@
 2 VERS 1.0
 1 DEST ANY
 1 DATE 31 AUG 2026
-1 FILE Robinson_Family_Tree_PUBLIC.ged
+1 FILE Robinson_Family_Tree_MASTER.ged
 1 GEDC
 2 VERS 5.5.1
 2 FORM LINEAGE-LINKED
 1 CHAR UTF-8
 1 LANG English
-1 NOTE Privacy-reviewed public derivative of the local evidence-cleaned master. Living people and their connecting families are omitted.
+1 NOTE Rebuilt from the 31 Aug 2026 Ancestry export. Unsupported propagated facts and citations were removed.
+0 @SUB1@ SUBM
+1 NAME Private family researcher
+0 @I312807192609@ INDI
+1 NAME Benjamin /Robinson/
+2 GIVN Benjamin
+2 SURN Robinson
+1 SEX M
+1 FAMC @F11@
+1 SOUR @S1@
+1 NOTE Name and relationship are user-supplied through the private-tree export; not independently verified.
+0 @I312807192610@ INDI
+1 NAME Devin /Robinson/
+2 GIVN Devin
+2 SURN Robinson
+1 SEX M
+1 FAMC @F10@
+1 FAMS @F11@
+1 SOUR @S1@
+1 NOTE Name and relationships are user-supplied through the private-tree export; not independently verified.
+0 @I312807192641@ INDI
+1 NAME Edward Gerald /Robinson/
+2 GIVN Edward Gerald
+2 SURN Robinson
+1 SEX M
+1 FAMC @F12@
+1 FAMS @F10@
+1 BIRT
+2 DATE 1937
+2 PLAC Ontario, Canada
+2 SOUR @S1@
+2 NOTE User-supplied through the private-tree export; not independently verified.
 0 @I312807192752@ INDI
 1 NAME Gerald Elmer /Robinson/
 2 GIVN Gerald Elmer
@@ -24,6 +55,7 @@
 1 SEX M
 1 FAMC @F5@
 1 FAMS @F7@
+1 FAMS @F12@
 1 BIRT
 2 DATE 7 MAY 1913
 2 PLAC York County, Ontario, Canada
@@ -368,6 +400,21 @@
 1 CHIL @I312807196670@
 1 SOUR @S15@
 1 NOTE Jane's 1845 marriage record names her father William Metcalf; Jane's mother is not identified.
+0 @F10@ FAM
+1 HUSB @I312807192641@
+1 CHIL @I312807192610@
+1 SOUR @S1@
+1 NOTE User-supplied structural relationship; not independently verified.
+0 @F11@ FAM
+1 HUSB @I312807192610@
+1 CHIL @I312807192609@
+1 SOUR @S1@
+1 NOTE User-supplied structural relationship; not independently verified.
+0 @F12@ FAM
+1 HUSB @I312807192752@
+1 CHIL @I312807192641@
+1 SOUR @S1@
+1 NOTE User-supplied structural relationship; not independently verified.
 0 @F13@ FAM
 1 HUSB @I312807199770@
 1 WIFE @I312807199808@
@@ -452,6 +499,11 @@
 2 TITL Marriage register entry for George Smithson and Jane Metcalf, 11 December 1845
 1 SOUR @S15@
 1 NOTE Preservation PNG reconstructed losslessly from the downloaded Ancestry source tiles.
+0 @S1@ SOUR
+1 AUTH Private family researcher
+1 TITL Robinson Family Tree, Ancestry GEDCOM export
+1 PUBL Exported from Ancestry on 31 Aug 2026
+1 NOTE Baseline source only for user-supplied living-person names and structural links; not independent evidence.
 0 @S2@ SOUR
 1 AUTH Ontario Registrar General
 1 TITL Birth registration of Gerald Aylmer Robinson, 7 May 1913
