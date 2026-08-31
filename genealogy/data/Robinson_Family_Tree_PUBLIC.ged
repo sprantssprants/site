@@ -1,0 +1,594 @@
+0 HEAD
+1 SOUR CODEX
+2 NAME Evidence-cleaned Robinson genealogy
+2 VERS 1.0
+1 DEST ANY
+1 DATE 31 AUG 2026
+1 FILE Robinson_Family_Tree_PUBLIC.ged
+1 GEDC
+2 VERS 5.5.1
+2 FORM LINEAGE-LINKED
+1 CHAR UTF-8
+1 LANG English
+1 NOTE Privacy-reviewed public derivative of the local evidence-cleaned master. Living people and their connecting families are omitted.
+0 @I312807192752@ INDI
+1 NAME Gerald Elmer /Robinson/
+2 GIVN Gerald Elmer
+2 SURN Robinson
+2 SOUR @S3@
+1 NAME Gerald Aylmer /Robinson/
+2 GIVN Gerald Aylmer
+2 SURN Robinson
+2 TYPE Birth name
+2 SOUR @S2@
+1 SEX M
+1 FAMC @F5@
+1 FAMS @F7@
+1 BIRT
+2 DATE 7 MAY 1913
+2 PLAC York County, Ontario, Canada
+2 SOUR @S2@
+2 NOTE The birth registration gives York County. Gerald's 1933 marriage registration says Toronto.
+1 OCCU Painter
+2 DATE 1933
+2 PLAC Windsor, Essex County, Ontario, Canada
+2 SOUR @S3@
+1 RESI
+2 DATE 1933
+2 ADDR 569 McKay Avenue
+2 PLAC Windsor, Essex County, Ontario, Canada
+2 SOUR @S3@
+1 NOTE Elmer is the adult form used on his marriage record; Aylmer is the form on his birth registration.
+1 OBJE @M4@
+1 OBJE @M5@
+0 @I312807196416@ INDI
+1 NAME John /Robinson/
+2 GIVN John
+2 SURN Robinson
+1 SEX M
+1 FAMC @F2@
+1 FAMS @F5@
+1 BIRT
+2 DATE ABT 1862
+2 PLAC Whitchurch Township, York County, Ontario, Canada
+2 SOUR @S4@
+2 SOUR @S5@
+2 SOUR @S6@
+1 RESI
+2 DATE 1871
+2 PLAC Whitchurch Township, York County, Ontario, Canada
+2 SOUR @S4@
+1 DEAT
+2 DATE 31 DEC 1922
+2 PLAC Windsor, Essex County, Ontario, Canada
+2 SOUR @S6@
+1 NOTE John's death registration calls his father John, but his own 1891 marriage and the 1871 household identify his father as James. James is therefore preferred.
+1 OBJE @M4@
+1 OBJE @M5@
+1 OBJE @M6@
+1 OBJE @M7@
+0 @I312807196451@ INDI
+1 NAME Margaret Jane /Simmerson/
+2 GIVN Margaret Jane
+2 SURN Simmerson
+1 SEX F
+1 FAMC @F3@
+1 FAMS @F5@
+1 BIRT
+2 DATE ABT 1874
+2 PLAC Ontario, Canada
+2 SOUR @S11@
+2 SOUR @S5@
+1 NOTE The 1881 census records her as age seven. The 1891 marriage age implies about 1872-1873; no exact birth date is asserted.
+1 OBJE @M4@
+1 OBJE @M5@
+1 OBJE @M6@
+1 OBJE @M11@
+0 @I312807196522@ INDI
+1 NAME James /Robinson/
+2 GIVN James
+2 SURN Robinson
+1 SEX M
+1 FAMC @F6@
+1 FAMS @F2@
+1 BIRT
+2 DATE ABT 1827
+2 PLAC Ontario, Canada
+2 SOUR @S17@
+2 SOUR @S7@
+1 RESI
+2 DATE 1861
+2 PLAC Whitchurch Township, York County, Canada West
+2 SOUR @S17@
+1 RESI
+2 DATE 1871
+2 PLAC Whitchurch Township, York County, Ontario, Canada
+2 SOUR @S4@
+1 RESI
+2 DATE 1881
+2 PLAC Whitchurch Township, York County, Ontario, Canada
+2 SOUR @S7@
+1 DEAT
+2 DATE 19 JUL 1905
+2 PLAC York County, Ontario, Canada
+2 SOUR @S8@
+1 NOTE No evidence supports a middle name William. Amon's will lists William and James as separate children.
+1 NOTE Amon is attached as James's father because Amon's will directly names a child James. James's mother remains unknown.
+1 OBJE @M2@
+1 OBJE @M6@
+1 OBJE @M8@
+1 OBJE @M9@
+0 @I312807196553@ INDI
+1 NAME Sarah /Cook/
+2 GIVN Sarah
+2 SURN Cook
+1 SEX F
+1 FAMS @F2@
+1 BIRT
+2 DATE ABT 1829
+2 PLAC Ontario, Canada
+2 SOUR @S7@
+1 RESI
+2 DATE 1871
+2 PLAC Whitchurch Township, York County, Ontario, Canada
+2 SOUR @S4@
+1 RESI
+2 DATE 1881
+2 PLAC Whitchurch Township, York County, Ontario, Canada
+2 SOUR @S7@
+1 DEAT
+2 DATE 9 OCT 1905
+2 PLAC York County, Ontario, Canada
+2 SOUR @S10@
+1 NOTE Cook is independently recorded as John's mother's maiden surname in his 1922 death registration.
+1 OBJE @M6@
+1 OBJE @M7@
+1 OBJE @M9@
+1 OBJE @M10@
+0 @I312807196589@ INDI
+1 NAME Henry /Simmerson/
+2 GIVN Henry
+2 SURN Simmerson
+1 NAME Henry /Simeson/
+2 GIVN Henry
+2 SURN Simeson
+2 TYPE Baptismal spelling
+2 SOUR @S13@
+1 SEX M
+1 FAMC @F1@
+1 FAMS @F3@
+1 BIRT
+2 DATE ABT 1847
+2 PLAC Yorkshire, England
+2 SOUR @S12@
+2 SOUR @S14@
+1 BAPM
+2 DATE 13 JAN 1847
+2 PLAC Scrayingham, Yorkshire, England
+2 SOUR @S13@
+1 DEAT
+2 DATE 23 AUG 1929
+2 PLAC York County, Ontario, Canada
+2 SOUR @S14@
+1 OBJE @M6@
+1 OBJE @M11@
+1 OBJE @M12@
+0 @I312807196617@ INDI
+1 NAME Mary E. /Boden/
+2 GIVN Mary E.
+2 SURN Boden
+1 SEX F
+1 FAMC @F4@
+1 FAMS @F3@
+1 BIRT
+2 DATE ABT 1846
+2 SOUR @S11@
+2 SOUR @S12@
+2 NOTE Birthplace is unresolved: the 1881 census says Ontario, while the 1871 marriage registration says Scotland.
+1 NOTE The previously attached 1851 census entry was removed because identity was not established.
+1 OBJE @M6@
+1 OBJE @M11@
+1 OBJE @M12@
+0 @I312807196651@ INDI
+1 NAME George /Smithson/
+2 GIVN George
+2 SURN Smithson
+2 SOUR @S15@
+1 NAME George /Simeson/
+2 GIVN George
+2 SURN Simeson
+2 TYPE Variant surname
+2 SOUR @S13@
+1 SEX M
+1 FAMC @F8@
+1 FAMS @F1@
+1 NOTE Smithson is the spelling in his 1845 marriage; Simeson is the spelling in Henry's baptism.
+1 OBJE @M12@
+1 OBJE @M13@
+0 @I312807196670@ INDI
+1 NAME Jane /Metcalf/
+2 GIVN Jane
+2 SURN Metcalf
+1 SEX F
+1 FAMC @F9@
+1 FAMS @F1@
+1 SOUR @S15@
+1 NOTE No birth date or mother is asserted; the proposed Ward ancestry is not proved.
+1 OBJE @M12@
+1 OBJE @M13@
+0 @I312807196716@ INDI
+1 NAME Henry /Boden/
+2 GIVN Henry
+2 SURN Boden
+1 SEX M
+1 FAMS @F4@
+1 SOUR @S12@
+1 NOTE Identified as Mary E. Boden's father on her 1871 marriage registration. No dates or birthplace are proved.
+1 OBJE @M12@
+0 @I312807196741@ INDI
+1 NAME Margaret //
+2 GIVN Margaret
+1 SEX F
+1 FAMS @F4@
+1 SOUR @S12@
+1 NOTE Mary's 1871 marriage registration names her mother Margaret Boden. Boden is a married surname; no maiden surname is proved. Dixon is therefore omitted.
+1 OBJE @M12@
+0 @I312807196764@ INDI
+1 NAME Thomas /Smithson/
+2 GIVN Thomas
+2 SURN Smithson
+1 SEX M
+1 FAMS @F8@
+1 SOUR @S15@
+1 NOTE Named as George Smithson's father in George's 1845 parish marriage record. No further identity facts are proved.
+1 OBJE @M13@
+0 @I312807196788@ INDI
+1 NAME William /Metcalf/
+2 GIVN William
+2 SURN Metcalf
+1 SEX M
+1 FAMS @F9@
+1 SOUR @S15@
+1 NOTE Named as Jane Metcalf's father in Jane's 1845 parish marriage record. No further identity facts are proved.
+1 OBJE @M13@
+0 @I312807197462@ INDI
+1 NAME Margaret /Sneddon/
+2 GIVN Margaret
+2 SURN Sneddon
+1 SEX F
+1 FAMS @F7@
+1 BIRT
+2 PLAC Coatbridge, Lanarkshire, Scotland
+2 SOUR @S3@
+1 SOUR @S3@
+1 OBJE @M5@
+0 @I312807199770@ INDI
+1 NAME Amon /Robinson/
+2 GIVN Amon
+2 SURN Robinson
+1 SEX M
+1 FAMS @F6@
+1 FAMS @F13@
+1 DEAT
+2 DATE BET 25 OCT 1862 AND 5 DEC 1862
+2 SOUR @S16@
+2 NOTE The interval is inferred from execution of the will and its probate; neither date is asserted as the death date.
+1 EVEN
+2 TYPE Property described in will
+2 DATE 25 OCT 1862
+2 PLAC Lot 23, Concession 4, Whitchurch Township, York County, Canada West
+2 SOUR @S16@
+1 NOTE The will directly names child James and wife Anna. It does not identify James's mother.
+1 OBJE @M1@
+1 OBJE @M2@
+1 OBJE @M3@
+0 @I312807199808@ INDI
+1 NAME Annie /Lundy/
+2 GIVN Annie
+2 SURN Lundy
+2 SOUR @S19@
+1 NAME Anna /Lundy/
+2 GIVN Anna
+2 SURN Lundy
+2 TYPE Will spelling
+2 SOUR @S16@
+1 SEX F
+1 FAMS @F13@
+1 NOTE Amon's will directly identifies wife Anna. Annie Lundy is the supported identification from Thomas Robinson's 1870 marriage record, but she is not attached as James's mother.
+1 OBJE @M2@
+0 @F1@ FAM
+1 HUSB @I312807196651@
+1 WIFE @I312807196670@
+1 CHIL @I312807196589@
+1 MARR
+2 DATE 11 DEC 1845
+2 PLAC Scrayingham, Yorkshire, England
+2 SOUR @S15@
+1 SOUR @S13@
+1 NOTE Henry's baptism directly names George and Jane as his parents.
+0 @F2@ FAM
+1 HUSB @I312807196522@
+1 WIFE @I312807196553@
+1 CHIL @I312807196416@
+1 MARR
+2 DATE 22 DEC 1846
+2 PLAC Home District, Canada West
+2 SOUR @S9@
+1 SOUR @S4@
+1 SOUR @S5@
+1 NOTE The 1871 census and John's 1891 marriage jointly identify John as their son.
+0 @F3@ FAM
+1 HUSB @I312807196589@
+1 WIFE @I312807196617@
+1 CHIL @I312807196451@
+1 MARR
+2 DATE 28 MAY 1871
+2 PLAC Scott Township, Ontario County, Ontario, Canada
+2 SOUR @S12@
+1 SOUR @S11@
+1 SOUR @S5@
+1 NOTE Margaret's 1881 childhood census and 1891 marriage independently identify Henry and Mary as her parents.
+0 @F4@ FAM
+1 HUSB @I312807196716@
+1 WIFE @I312807196741@
+1 CHIL @I312807196617@
+1 SOUR @S12@
+1 NOTE Mary's 1871 marriage registration directly names Henry Boden and Margaret Boden as her parents. Margaret's maiden surname is unknown.
+0 @F5@ FAM
+1 HUSB @I312807196416@
+1 WIFE @I312807196451@
+1 CHIL @I312807192752@
+1 MARR
+2 DATE 1 APR 1891
+2 PLAC Franklin, North Gwillimbury Township, York County, Ontario, Canada
+2 SOUR @S5@
+1 SOUR @S2@
+1 SOUR @S3@
+1 NOTE Gerald's birth and marriage registrations both identify John and Margaret Simmerson as his parents.
+0 @F6@ FAM
+1 HUSB @I312807199770@
+1 CHIL @I312807196522@
+1 SOUR @S16@
+1 NOTE Amon's will directly names a child James. No wife is placed in this parent-child family because James's mother is not proved.
+0 @F7@ FAM
+1 HUSB @I312807192752@
+1 WIFE @I312807197462@
+1 MARR
+2 DATE 15 JUN 1933
+2 PLAC Windsor, Essex County, Ontario, Canada
+2 SOUR @S3@
+2 NOTE The marriage licence was dated 12 Jun 1933; the ceremony certificate records 15 Jun 1933.
+0 @F8@ FAM
+1 HUSB @I312807196764@
+1 CHIL @I312807196651@
+1 SOUR @S15@
+1 NOTE George's 1845 marriage record names his father Thomas Smithson; George's mother is not identified.
+0 @F9@ FAM
+1 HUSB @I312807196788@
+1 CHIL @I312807196670@
+1 SOUR @S15@
+1 NOTE Jane's 1845 marriage record names her father William Metcalf; Jane's mother is not identified.
+0 @F13@ FAM
+1 HUSB @I312807199770@
+1 WIFE @I312807199808@
+1 SOUR @S16@
+1 SOUR @S19@
+1 NOTE Amon's will calls Anna his wife. This spouse family intentionally has no child link to James.
+0 @M1@ OBJE
+1 FILE ../records/Amon_Robinson_1862_Estate/1862_Amon_Robinson_Estate_01_Probate_Order_Image_655.png
+2 FORM png
+2 TITL Probate order for Amon Robinson, 5 December 1862
+1 SOUR @S16@
+1 NOTE FamilySearch DGS 8345363, image 655. Preservation PNG reconstructed losslessly from downloaded source tiles.
+0 @M2@ OBJE
+1 FILE ../records/Amon_Robinson_1862_Estate/1862_Amon_Robinson_Estate_02_Will_Page_1_Image_656.png
+2 FORM png
+2 TITL Last will and testament of Amon Robinson, page 1
+1 SOUR @S16@
+1 NOTE FamilySearch DGS 8345363, image 656. This page names James among Amon's children.
+0 @M3@ OBJE
+1 FILE ../records/Amon_Robinson_1862_Estate/1862_Amon_Robinson_Estate_03_Will_Page_2_Image_657.png
+2 FORM png
+2 TITL Last will and testament of Amon Robinson, page 2
+1 SOUR @S16@
+1 NOTE FamilySearch DGS 8345363, image 657. This page contains the execution date, mark and witnesses.
+0 @M4@ OBJE
+1 FILE ../records/Gerald_Elmer_Robinson_1913-1974/1913_Gerald_Aylmer_Robinson_Birth_Registration.png
+2 FORM png
+2 TITL Birth registration of Gerald Aylmer Robinson, 7 May 1913
+1 SOUR @S2@
+1 NOTE Preservation PNG reconstructed losslessly from the downloaded Ancestry source tiles.
+0 @M5@ OBJE
+1 FILE ../records/Gerald_Elmer_Robinson_1913-1974/1933_Gerald_Elmer_Robinson_Margaret_Sneddon_Marriage_Registration.png
+2 FORM png
+2 TITL Marriage registration and licence of Gerald Elmer Robinson and Margaret Sneddon, 1933
+1 SOUR @S3@
+1 NOTE Preservation PNG reconstructed losslessly from the downloaded Ancestry source tiles.
+0 @M6@ OBJE
+1 FILE ../records/John_Robinson_1862-1922/1891_John_Robinson_Margaret_Jane_Simmerson_Marriage_Registration.png
+2 FORM png
+2 TITL Marriage registration of John Robinson and Margaret Jane Simmerson, 1 April 1891
+1 SOUR @S5@
+1 NOTE Preservation PNG reconstructed losslessly from the downloaded Ancestry source tiles.
+0 @M7@ OBJE
+1 FILE ../records/John_Robinson_1862-1922/1922_John_Robinson_Death_Registration.png
+2 FORM png
+2 TITL Death registration of John Robinson, 31 December 1922
+1 SOUR @S6@
+1 NOTE Preservation PNG reconstructed losslessly from the downloaded Ancestry source tiles.
+0 @M8@ OBJE
+1 FILE ../records/James_Robinson_1827-1905/1905_James_Robinson_Death_Registration.png
+2 FORM png
+2 TITL Death registration of James Robinson, 19 July 1905
+1 SOUR @S8@
+1 NOTE Preservation PNG reconstructed losslessly from the downloaded Ancestry source tiles.
+0 @M9@ OBJE
+1 FILE ../records/James_Robinson_1827-1905/1846_James_Robinson_Sarah_Cook_Marriage_Register.png
+2 FORM png
+2 TITL Marriage register entry for James Robinson and Sarah Cook, 22 December 1846
+1 SOUR @S9@
+1 NOTE Preservation PNG reconstructed losslessly from the downloaded Ancestry source tiles.
+0 @M10@ OBJE
+1 FILE ../records/Sarah_Cook_1829-1905/1905_Sarah_Cook_Robinson_Death_Registration.png
+2 FORM png
+2 TITL Death registration of Sarah Cook Robinson, 9 October 1905
+1 SOUR @S10@
+1 NOTE Preservation PNG reconstructed losslessly from the downloaded Ancestry source tiles.
+0 @M11@ OBJE
+1 FILE ../records/Margaret_Jane_Simmerson_1874-Unknown/1881_Margaret_Jane_Simmerson_Census.png
+2 FORM png
+2 TITL 1881 census household of Henry Simmerson, including Margaret Jane
+1 SOUR @S11@
+1 NOTE Preservation PNG reconstructed losslessly from the downloaded Ancestry source tiles.
+0 @M12@ OBJE
+1 FILE ../records/Henry_Simmerson_1847-1929/1871_Henry_Simerson_Mary_E_Boden_Marriage_Registration.png
+2 FORM png
+2 TITL Marriage registration of Henry Simerson and Mary E. Boden, 28 May 1871
+1 SOUR @S12@
+1 NOTE Preservation PNG reconstructed losslessly from the downloaded Ancestry source tiles.
+0 @M13@ OBJE
+1 FILE ../records/George_Smithson_and_Jane_Metcalf/1845_George_Smithson_Jane_Metcalf_Marriage_Register.png
+2 FORM png
+2 TITL Marriage register entry for George Smithson and Jane Metcalf, 11 December 1845
+1 SOUR @S15@
+1 NOTE Preservation PNG reconstructed losslessly from the downloaded Ancestry source tiles.
+0 @S2@ SOUR
+1 AUTH Ontario Registrar General
+1 TITL Birth registration of Gerald Aylmer Robinson, 7 May 1913
+1 PUBL Archives of Ontario, RG 80-2, reel 245; Ancestry collection 8838, record 2580610
+1 REPO @R1@
+1 NOTE Original registration image consulted.
+2 CONT https://www.ancestry.ca/imageviewer/collections/8838/images/32915_258597-00306?pId=2580610
+1 OBJE @M4@
+0 @S3@ SOUR
+1 AUTH Ontario Registrar General
+1 TITL Marriage registration and licence of Gerald Elmer Robinson and Margaret Sneddon, 1933
+1 PUBL Archives of Ontario; Ancestry collection 7921, record 11984888
+1 REPO @R1@
+1 NOTE Original registration image consulted.
+2 CONT https://www.ancestry.ca/imageviewer/collections/7921/images/45716_83024005548_1590-00305?pId=11984888
+1 OBJE @M5@
+0 @S4@ SOUR
+1 AUTH Government of Canada
+1 TITL 1871 Census of Canada, Whitchurch, York North, household of James Robinson
+1 PUBL Library and Archives Canada, roll C-9965, page 28; Ancestry collection 1578, record 2690872
+1 REPO @R2@
+1 NOTE Original census images span two pages; household number 103.
+2 CONT https://www.ancestry.ca/search/collections/1578/records/2690872
+0 @S5@ SOUR
+1 AUTH Ontario Registrar General
+1 TITL Marriage registration of John Robinson and Margaret Simmerson, 1 Apr 1891
+1 PUBL Archives of Ontario, reel 73; Ancestry collection 7921, record 1933426
+1 REPO @R1@
+1 NOTE Original registration image consulted; rightmost entry on the page.
+2 CONT https://www.ancestry.ca/imageviewer/collections/7921/images/ONMS932_73-0708?pId=1933426
+1 OBJE @M6@
+0 @S6@ SOUR
+1 AUTH Ontario Registrar General
+1 TITL Death registration of John Robinson, 31 Dec 1922
+1 PUBL Archives of Ontario, series 288; Ancestry collection 8946, record 388238
+1 REPO @R1@
+1 NOTE Original registration image consulted.
+2 CONT https://www.ancestry.ca/imageviewer/collections/8946/images/ONMS935_288-0913?pId=388238
+1 OBJE @M7@
+0 @S7@ SOUR
+1 AUTH Government of Canada
+1 TITL 1881 Census of Canada, Whitchurch, York North, household of James Robinson
+1 PUBL Library and Archives Canada, roll C-13249, page 15, family 64; Ancestry collection 1577, record 3194466
+1 REPO @R2@
+1 NOTE Original census/index reviewed for James and Sarah.
+2 CONT https://www.ancestry.ca/search/collections/1577/records/3194466
+0 @S8@ SOUR
+1 AUTH Ontario Registrar General
+1 TITL Death registration of James Robinson, 19 Jul 1905
+1 PUBL Archives of Ontario, series 124; Ancestry collection 8946, record 2072710
+1 REPO @R1@
+1 NOTE Original registration image consulted.
+2 CONT https://www.ancestry.ca/imageviewer/collections/8946/images/ONMS935_124-0089?pId=2072710
+1 OBJE @M8@
+0 @S9@ SOUR
+1 AUTH Home District marriage registrar
+1 TITL Marriage register entry for James Robinson and Sarah Cook, 22 Dec 1846
+1 PUBL Archives of Ontario, District Marriage Registers, reel 2; Ancestry collection 7921, records 3828596 and 7879073
+1 REPO @R1@
+1 NOTE Original district marriage register image consulted.
+2 CONT https://www.ancestry.ca/imageviewer/collections/7921/images/31224_178753-00427?pId=3828596
+1 OBJE @M9@
+0 @S10@ SOUR
+1 AUTH Ontario Registrar General
+1 TITL Death registration of Sarah Robinson, 9 Oct 1905
+1 PUBL Archives of Ontario, series 119; Ancestry collection 8946, record 25843
+1 REPO @R1@
+1 NOTE Original death-register image consulted.
+2 CONT https://www.ancestry.ca/imageviewer/collections/8946/images/ONMS935_119-0008?pId=25843
+1 OBJE @M10@
+0 @S11@ SOUR
+1 AUTH Government of Canada
+1 TITL 1881 Census of Canada, Scott, Ontario North, household of Henry Simmerson
+1 PUBL Library and Archives Canada, roll C-13245; Ancestry collection 1577, record 3036628
+1 REPO @R2@
+1 NOTE Original census image consulted; household 138.
+2 CONT https://www.ancestry.ca/imageviewer/collections/1577/images/31229_C_13245-00136?pId=3036628
+1 OBJE @M11@
+0 @S12@ SOUR
+1 AUTH Ontario Registrar General
+1 TITL Marriage registration of Henry Simerson and Mary E. Boden, 28 May 1871
+1 PUBL Archives of Ontario, reel 4; Ancestry collection 7921, records 3370965 and 3705504
+1 REPO @R1@
+1 NOTE Original registration image/index consulted.
+2 CONT https://www.ancestry.ca/imageviewer/collections/7921/images/ONMS932_4-1155?pId=3370965
+1 OBJE @M12@
+0 @S13@ SOUR
+1 AUTH Church of England, parish of Scrayingham
+1 TITL Baptism of Henry Simeson, 13 Jan 1847
+1 PUBL Borthwick Institute, PR/SCR/7; Ancestry collection 62232, record 464877
+1 REPO @R3@
+1 NOTE Parish-register image/index identifies parents George and Jane.
+2 CONT https://www.ancestry.ca/search/collections/62232/records/464877
+0 @S14@ SOUR
+1 AUTH Ontario Registrar General
+1 TITL Death registration of Henry Simerson, 23 Aug 1929
+1 PUBL Archives of Ontario, series 378; Ancestry collection 8946, record 688725
+1 REPO @R1@
+1 NOTE Original registration/index consulted.
+2 CONT https://www.ancestry.ca/search/collections/8946/records/688725
+0 @S15@ SOUR
+1 AUTH Church of England, parish of Scrayingham
+1 TITL Marriage of George Smithson and Jane Metcalf, 11 Dec 1845
+1 PUBL Borthwick Institute, PR/SCR/20; Ancestry collection 62233, records 460649 and 90460649
+1 REPO @R3@
+1 NOTE Original parish-register image names fathers Thomas Smithson and William Metcalf.
+2 CONT https://www.ancestry.ca/imageviewer/collections/62233/images/62230_193023000115_0717-00047?pid=460649
+1 OBJE @M13@
+0 @S16@ SOUR
+1 AUTH York County Surrogate Court
+1 TITL Will and probate of Amon Robinson, 1862
+1 PUBL Archives of Ontario; digital images, FamilySearch DGS 8345363, images 655-657
+1 REPO @R1@
+1 NOTE Original will images consulted. Will dated 25 Oct 1862; probate 5 Dec 1862.
+2 CONT Diplomatic wording names "William James Joseph and Henry Robinson"; the bequest says "to each," supporting four separate children.
+2 CONT The will names wife Anna and describes the east quarter of Lot 23, Concession 4, Whitchurch Township.
+2 CONT https://www.familysearch.org/en/records/images (search Image Group Number 8345363; view images 655-657)
+1 OBJE @M1@
+1 OBJE @M2@
+1 OBJE @M3@
+0 @S17@ SOUR
+1 AUTH Government of Canada
+1 TITL 1861 Census of Canada, Whitchurch, York, household of James Robinson
+1 PUBL Library and Archives Canada, roll C-1090; Ancestry collection 1570, record 797789005
+1 REPO @R2@
+1 NOTE Original census/index records James as a married labourer born in Upper Canada.
+2 CONT https://www.ancestry.ca/search/collections/1570/records/797789005
+0 @S19@ SOUR
+1 AUTH Ontario civil marriage registrar
+1 TITL Marriage registration of Thomas Robinson, 1870
+1 PUBL Archives of Ontario
+1 REPO @R1@
+1 NOTE Near-contemporary record identifies Thomas's mother as Annie Lundy. Exact reel and record number must be reacquired before website attachment.
+0 @R1@ REPO
+1 NAME Archives of Ontario
+0 @R2@ REPO
+1 NAME Library and Archives Canada
+0 @R3@ REPO
+1 NAME Borthwick Institute for Archives
+0 TRLR
