@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <svg xmlns="http://www.w3.org/2000/svg" width="10098" height="14328" viewBox="0 0 10098 14328" role="img" aria-label="Birthplace-flag pedigree">
 <style>
-  .connector { fill:none; stroke:#53606c; stroke-width:2.2; }
+  .connector { fill:none; stroke:#17212b; stroke-width:5; }
   .person { fill:none; stroke:#17212b; stroke-width:2.5; }
   .flag { overflow:hidden; }
   .generation-beige { fill:#eadfc8; }
