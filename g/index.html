@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width,initial-scale=1">
   <title>Flag pedigree</title>
   <style>
-    html, body, #stage { width: 100%; height: 100%; margin: 0; overflow: hidden; }
+    html, body, #stage { width: 100%; height: 100%; margin: 0; overflow: hidden; overscroll-behavior: none; }
     body { background: #fbfaf6; }
     #stage { position: relative; cursor: grab; touch-action: none; }
     #stage.dragging { cursor: grabbing; }
@@ -17,6 +17,7 @@
       transform-origin: 0 0;
       user-select: none;
       -webkit-user-drag: none;
+      -webkit-touch-callout: none;
     }
   </style>
 </head>
@@ -34,9 +35,13 @@
     let scale = 1;
     let fittedScale = 1;
     let minimumScale = 0.01;
+    const pointers = new Map();
     let dragging = false;
     let lastX = 0;
     let lastY = 0;
+    let pinchDistance = 0;
+    let pinchMidX = 0;
+    let pinchMidY = 0;
 
     function draw() {
       tree.style.transform = `translate(${x}px, ${y}px) scale(${scale})`;
@@ -76,29 +81,72 @@
     }, { passive: false });
 
     stage.addEventListener('pointerdown', event => {
-      dragging = true;
-      lastX = event.clientX;
-      lastY = event.clientY;
-      stage.classList.add('dragging');
+      pointers.set(event.pointerId, { x: event.clientX, y: event.clientY });
       stage.setPointerCapture(event.pointerId);
+      dragging = true;
+      stage.classList.add('dragging');
+
+      if (pointers.size === 1) {
+        lastX = event.clientX;
+        lastY = event.clientY;
+      } else if (pointers.size === 2) {
+        const [first, second] = [...pointers.values()];
+        pinchDistance = Math.hypot(second.x - first.x, second.y - first.y);
+        pinchMidX = (first.x + second.x) / 2;
+        pinchMidY = (first.y + second.y) / 2;
+      }
     });
 
     stage.addEventListener('pointermove', event => {
-      if (!dragging) return;
-      x += event.clientX - lastX;
-      y += event.clientY - lastY;
-      lastX = event.clientX;
-      lastY = event.clientY;
-      draw();
+      if (!pointers.has(event.pointerId)) return;
+      pointers.set(event.pointerId, { x: event.clientX, y: event.clientY });
+
+      if (pointers.size === 1) {
+        x += event.clientX - lastX;
+        y += event.clientY - lastY;
+        lastX = event.clientX;
+        lastY = event.clientY;
+        draw();
+      } else {
+        const [first, second] = [...pointers.values()];
+        const nextDistance = Math.hypot(second.x - first.x, second.y - first.y);
+        const nextMidX = (first.x + second.x) / 2;
+        const nextMidY = (first.y + second.y) / 2;
+
+        if (pinchDistance > 0) {
+          const nextScale = Math.max(minimumScale, Math.min(8, scale * nextDistance / pinchDistance));
+          const worldX = (pinchMidX - x) / scale;
+          const worldY = (pinchMidY - y) / scale;
+          x = nextMidX - worldX * nextScale;
+          y = nextMidY - worldY * nextScale;
+          scale = nextScale;
+          draw();
+        }
+
+        pinchDistance = nextDistance;
+        pinchMidX = nextMidX;
+        pinchMidY = nextMidY;
+      }
     });
 
-    function stopDragging() {
-      dragging = false;
-      stage.classList.remove('dragging');
+    function stopDragging(event) {
+      pointers.delete(event.pointerId);
+
+      if (pointers.size === 1) {
+        const remaining = [...pointers.values()][0];
+        lastX = remaining.x;
+        lastY = remaining.y;
+        pinchDistance = 0;
+      } else if (pointers.size === 0) {
+        dragging = false;
+        pinchDistance = 0;
+        stage.classList.remove('dragging');
+      }
     }
 
     stage.addEventListener('pointerup', stopDragging);
     stage.addEventListener('pointercancel', stopDragging);
+    stage.addEventListener('lostpointercapture', stopDragging);
     stage.addEventListener('dblclick', fit);
     window.addEventListener('resize', fit);
     function initializeTree() {
