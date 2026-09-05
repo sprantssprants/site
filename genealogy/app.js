@@ -347,14 +347,15 @@ const people = {
     top: 70,
     sex: "male",
     name: "William Clarke",
-    years: "b. 1776–1785 · d. after 1836",
+    years: "c. 1770–before 1833",
     parents: [],
-    facts: [["Born", "between 1776 and 1785 · working estimate"], ["Room", "Southwest Battricks Island · 1806"], ["Church petition", "Twillingate · 1811"], ["Residence", "Back Harbour · 1836"], ["Died", "after 1836"]],
-    note: "The estimate assumes the 1806 room claimant and the 1836 William household are the same man. The 1806 claim, 1811 signature, 1821 gift, and 1836 census form a coherent trail, but they do not uniquely prove one identity or state that he was John's father.",
+    facts: [["Born", "about 1770 · estimated"], ["Appeal", "Principal inhabitant of Twillingate · 1799"], ["Room", "Southwest Battricks Island · 1806"], ["Died", "before 19 February 1833"]],
+    note: "About 1770 is a family-history estimate, putting William near 29 when he appeared among Twillingate's principal inhabitants in 1799. William Senior is separate from the William Junior household in 1836. The 1821 register explicitly calls the donor Wm Clark Senr., and Ann was his widow by 1833.",
     records: [
+      source("1799 appeal for a minister", "William Clark among Twillingate's principal inhabitants", "https://ngb.chebucto.org/Articles/missionary-magazine-1799.shtml"),
       source("Twillingate fishing-room register", "William Clark's Room · 1806; gift by Wm Clark Senr. · 1821", "https://dai.mun.ca/PDFs/archives/RegisterforroomsatTwillingate1806to1828.pdf"),
       source("1811 Twillingate church petition", "Wm Clark among the signers", "https://collections.mun.ca/digital/collection/cns_colonia/id/4821/rec/1"),
-      source("1836 Back Harbour census", "Separate Wm Clark household", "https://ngb.chebucto.org/C1836/1836-back-hbr.shtml")
+      source("Ann Clark Senior's will", "Dated 19 February 1833 · researcher identifies her as William's widow", "https://ngb.chebucto.org/Wills/clark-ann-1-277.shtml")
     ]
   }
 };

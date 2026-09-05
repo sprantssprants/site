@@ -531,10 +531,14 @@
 1 SEX M
 1 FAMS @FWILLIAMJOHN@
 1 BIRT
-2 DATE BET 1776 AND 1785
-2 SOUR @S33@
-2 SOUR @S34@
-2 NOTE This estimate combines adulthood as a room claimant by 1806 with the age 14 to 60 bracket of the William Clark household in 1836, assuming the records refer to the same man.
+2 DATE ABT 1770
+2 SOUR @S24@
+2 SOUR @S37@
+2 NOTE William Clark is named among Twillingate's principal inhabitants in 1799. The researcher considers him likely at least 25 to 30 by then, making about 1770 a reasonable working estimate; his exact age is unknown.
+1 RESI
+2 DATE 1799
+2 PLAC Twillingate, Newfoundland
+2 SOUR @S37@
 1 RESI
 2 DATE 1806
 2 PLAC Battricks Island, Newfoundland
@@ -543,15 +547,13 @@
 2 DATE 1811
 2 PLAC Twillingate, Newfoundland
 2 SOUR @S36@
-1 RESI
-2 DATE 1836
-2 PLAC Back Harbour, Newfoundland
-2 SOUR @S33@
 1 DEAT
-2 DATE AFT 1836
-2 SOUR @S33@
-1 NOTE At the researcher's direction, William is entered as John's father. The 1821 room register says John and a co-occupant received the Battricks Island room as a gift from Wm Clark Senr.; it does not state a kinship.
-2 CONT The 1806 room claim, 1811 petition signature, 1821 gift, and 1836 census form a coherent but not yet uniquely proved identity chain.
+2 DATE BEF 19 FEB 1833
+2 SOUR @S24@
+2 SOUR @S35@
+2 NOTE The researcher identifies Ann Clark Senior as William's widow when she made her will on 19 Feb 1833. The published will transcription fixes that date but does not itself include the word widow or name a husband.
+1 NOTE At the researcher's direction, William Senior is entered as John's father. The 1821 room register says John and a co-occupant received the Battricks Island room as a gift from Wm Clark Senr.; it does not state a kinship.
+2 CONT The William Clark household in the 1836 census is William Junior and is deliberately excluded from this person's chronology. The 1799 appeal, 1806 room claim, 1811 petition, and 1821 gift form the working Senior timeline.
 0 @F1@ FAM
 1 HUSB @I312807196651@
 1 WIFE @I312807196670@
@@ -992,7 +994,7 @@
 1 TITL Clarke direct-line statement supplied 5 Sep 2026
 1 PUBL Researcher correspondence, 5 Sep 2026
 1 NOTE Supplies Carla Clarke born 1967; her father Freeman born 1943; his father Lloyd born 1916; his father Walter born 1866; and directs the working John-to-Josiah and William-to-John relationships.
-2 CONT Treated as a lead or modern-family source, not as independent historical proof.
+2 CONT The researcher further identifies William Senior as an adult by 1799, deceased before his widow Ann's 19 Feb 1833 will, and distinct from the William Junior household in 1836. Treated as family evidence, not independent historical proof.
 0 @S25@ SOUR
 1 AUTH Newfoundland's Grand Banks / NLGenWeb contributors
 1 TITL Notre Dame Bay civil marriages, 1891-1901: Walter Clarke and Lydia Butt
@@ -1055,7 +1057,8 @@
 1 TITL 1836 Census, Back Harbour
 1 PUBL Nominal census transcription and archival PDF
 1 REPO @R4@
-1 NOTE John Clark's household contains three males under 14, two males aged 14 to 60, four females under 14, and two females aged 14 to 60. Josiah, about 7, could fit but is unnamed. A separate Wm Clark household contains one male aged 14 to 60.
+1 NOTE John Clark's household contains three males under 14, two males aged 14 to 60, four females under 14, and two females aged 14 to 60. Josiah, about 7, could fit but is unnamed.
+2 CONT The separate Wm Clark household is treated as William Junior, not William Senior.
 2 CONT https://ngb.chebucto.org/C1836/1836-back-hbr.shtml
 2 CONT https://dai.mun.ca/PDFs/archives/NominalCensusExploitsRiverCapeJohnandFogoIsland1836.pdf
 0 @S34@ SOUR
@@ -1071,7 +1074,7 @@
 1 TITL Last will and testament of Ann Clark, 1833; proved 1838
 1 PUBL Newfoundland will-book transcription, volume 1, page 277
 1 REPO @R4@
-1 NOTE Names Ann's sons John, Reuben, and William and daughters Lydia Colbourne and Ann Talbott. It establishes John in the local Clark family cluster but does not identify Ann's husband or prove the direct line claimed here.
+1 NOTE Names Ann's sons John, Reuben, and William and daughters Lydia Colbourne and Ann Talbott. The researcher identifies Ann as William Senior's widow; the published transcription itself names no husband and does not state marital status.
 2 CONT https://ngb.chebucto.org/Wills/clark-ann-1-277.shtml
 0 @S36@ SOUR
 1 AUTH Residents of Twillingate
@@ -1081,6 +1084,13 @@
 1 NOTE Wm Clark appears among the signatories. This establishes an adult of that name in the wider locality but does not independently identify him as the Battricks Island room claimant or John's father.
 2 CONT https://collections.mun.ca/digital/collection/cns_colonia/id/4821/rec/1
 2 CONT https://dai.mun.ca/PDFs/cns_colonia/A51_V22.pdf
+0 @S37@ SOUR
+1 AUTH Principal inhabitants of Twillingate
+1 TITL Appeal for a minister, published in the Missionary Magazine, 1799
+1 PUBL Missionary Magazine transcription
+1 REPO @R4@
+1 NOTE William Clark is one of fifteen signatories described as principal inhabitants of Twillingate. This supports his adult standing by 1799 but supplies no age or kinship.
+2 CONT https://ngb.chebucto.org/Articles/missionary-magazine-1799.shtml
 0 @R1@ REPO
 1 NAME Archives of Ontario
 0 @R2@ REPO
