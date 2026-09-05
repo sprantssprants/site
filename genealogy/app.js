@@ -1,6 +1,65 @@
 const people = {
-  gerald: {
+  benjamin: {
     ahn: 1,
+    top: 50,
+    sex: "male",
+    name: "Benjamin Robinson",
+    years: "living generation",
+    parents: ["devin", "carla"],
+    facts: [["Parents", "Devin Robinson and Carla Clarke"], ["Evidence", "Private family information"]],
+    note: "This modern connection was supplied by the family researcher and has not been independently documented.",
+    records: []
+  },
+  devin: {
+    ahn: 2,
+    top: 30,
+    sex: "male",
+    name: "Devin Robinson",
+    years: "living generation",
+    parents: ["edward"],
+    facts: [["Father", "Edward Gerald Robinson"], ["Child", "Benjamin Robinson"], ["Evidence", "Private family information"]],
+    note: "The relationships shown here were supplied through the private family tree and have not been independently documented.",
+    records: []
+  },
+  carla: {
+    ahn: 3,
+    top: 70,
+    sex: "female",
+    name: "Carla Clarke",
+    years: "born 1967",
+    parents: ["freeman"],
+    facts: [["Born", "1967"], ["Father", "Freeman Clarke"], ["Child", "Benjamin Robinson"], ["Evidence", "Private family information"]],
+    note: "Birth year and relationships were supplied by the family researcher. No independent modern record was sought.",
+    records: []
+  },
+  edward: {
+    ahn: 4,
+    top: 30,
+    sex: "male",
+    name: "Edward Gerald Robinson",
+    years: "born 1937",
+    parents: ["gerald"],
+    facts: [["Born", "1937 · Ontario, Canada"], ["Father", "Gerald Elmer Robinson"], ["Child", "Devin Robinson"]],
+    note: "Birth and relationships are supplied through the private family tree and have not been independently documented.",
+    records: []
+  },
+  freeman: {
+    ahn: 6,
+    top: 70,
+    sex: "male",
+    name: "Freeman Clarke",
+    years: "c. 1943–1998",
+    parents: ["lloyd"],
+    facts: [["Born", "about 1943"], ["Residence", "Springdale · 1945"], ["Father", "Lloyd Brooks Clarke"], ["Died", "1998"]],
+    note: "The supplied 1943 birth year agrees with age two in the 1945 census. That census places Freeman in Lloyd's household; later obituaries corroborate the relationship and report Freeman's 1998 death.",
+    records: [
+      source("1945 Springdale census", "Lloyd Clarke household · Freeman aged 2", "https://ngb.chebucto.org/C1945/45-springdale-gb.shtml"),
+      source("Beatrice Clarke obituary", "Collateral source · reports Freeman died in 1998", "https://www.greenbayfuneralhome.ca/obituary/3729732")
+    ]
+  },
+  gerald: {
+    ahn: 8,
+    top: 30,
     sex: "male",
     name: "Gerald Elmer Robinson",
     years: "born 1913",
@@ -20,7 +79,8 @@ const people = {
     ]
   },
   john: {
-    ahn: 2,
+    ahn: 16,
+    top: 18,
     sex: "male",
     name: "John Robinson",
     years: "c. 1862–1922",
@@ -38,7 +98,8 @@ const people = {
     ]
   },
   margaretJane: {
-    ahn: 3,
+    ahn: 17,
+    top: 42,
     sex: "female",
     name: "Margaret Jane Simmerson",
     years: "born c. 1874",
@@ -56,7 +117,8 @@ const people = {
     ]
   },
   james: {
-    ahn: 4,
+    ahn: 32,
+    top: 12,
     sex: "male",
     name: "James Robinson",
     years: "c. 1827–1905",
@@ -76,7 +138,8 @@ const people = {
     ]
   },
   sarah: {
-    ahn: 5,
+    ahn: 33,
+    top: 24,
     sex: "female",
     name: "Sarah Cook",
     years: "c. 1829–1905",
@@ -94,7 +157,8 @@ const people = {
     ]
   },
   henry: {
-    ahn: 6,
+    ahn: 34,
+    top: 36,
     sex: "male",
     name: "Henry Simmerson",
     years: "c. 1847–1929",
@@ -112,7 +176,8 @@ const people = {
     ]
   },
   mary: {
-    ahn: 7,
+    ahn: 35,
+    top: 48,
     sex: "female",
     name: "Mary E. Boden",
     years: "born c. 1846",
@@ -130,7 +195,8 @@ const people = {
     ]
   },
   amon: {
-    ahn: 8,
+    ahn: 64,
+    top: 12,
     sex: "male",
     name: "Amon Robinson",
     years: "died 1862",
@@ -149,7 +215,8 @@ const people = {
     ]
   },
   george: {
-    ahn: 12,
+    ahn: 68,
+    top: 32,
     sex: "male",
     name: "George Smithson",
     years: "recorded 1845",
@@ -159,7 +226,8 @@ const people = {
     records: [record("Parish marriage register", "Scrayingham · 11 December 1845", "George_Smithson_and_Jane_Metcalf/1845_George_Smithson_Jane_Metcalf_Marriage_Register.png")]
   },
   jane: {
-    ahn: 13,
+    ahn: 69,
+    top: 42,
     sex: "female",
     name: "Jane Metcalf",
     years: "recorded 1845",
@@ -169,7 +237,8 @@ const people = {
     records: [record("Parish marriage register", "Scrayingham · 11 December 1845", "George_Smithson_and_Jane_Metcalf/1845_George_Smithson_Jane_Metcalf_Marriage_Register.png")]
   },
   henryBoden: {
-    ahn: 14,
+    ahn: 70,
+    top: 52,
     sex: "male",
     name: "Henry Boden",
     years: "recorded 1871",
@@ -179,7 +248,8 @@ const people = {
     records: [record("Daughter’s marriage registration", "Ontario civil registration · 28 May 1871", "Henry_Simmerson_1847-1929/1871_Henry_Simerson_Mary_E_Boden_Marriage_Registration.png")]
   },
   margaretBoden: {
-    ahn: 15,
+    ahn: 71,
+    top: 62,
     sex: "female",
     name: "Margaret",
     years: "maiden name unknown",
@@ -189,7 +259,8 @@ const people = {
     records: [record("Daughter’s marriage registration", "Ontario civil registration · 28 May 1871", "Henry_Simmerson_1847-1929/1871_Henry_Simerson_Mary_E_Boden_Marriage_Registration.png")]
   },
   thomasSmithson: {
-    ahn: 24,
+    ahn: 136,
+    top: 32,
     sex: "male",
     name: "Thomas Smithson",
     years: "recorded 1845",
@@ -199,7 +270,8 @@ const people = {
     records: [record("Son’s parish marriage", "Scrayingham · 11 December 1845", "George_Smithson_and_Jane_Metcalf/1845_George_Smithson_Jane_Metcalf_Marriage_Register.png")]
   },
   williamMetcalf: {
-    ahn: 26,
+    ahn: 138,
+    top: 42,
     sex: "male",
     name: "William Metcalf",
     years: "recorded 1845",
@@ -207,11 +279,105 @@ const people = {
     facts: [["Daughter", "Jane Metcalf"], ["Evidence", "Named on Jane’s 1845 parish marriage record"]],
     note: "No further identity facts are claimed.",
     records: [record("Daughter’s parish marriage", "Scrayingham · 11 December 1845", "George_Smithson_and_Jane_Metcalf/1845_George_Smithson_Jane_Metcalf_Marriage_Register.png")]
+  },
+  lloyd: {
+    ahn: 12,
+    top: 70,
+    sex: "male",
+    name: "Lloyd Brooks Clarke",
+    years: "c. 1916–2000",
+    parents: ["walter"],
+    facts: [["Born", "about 1916 · Springdale, Newfoundland"], ["Father", "Walter Clarke"], ["Died", "25 October 2000 · Grand Falls-Windsor, Newfoundland"]],
+    note: "Age 29 in 1945 and age 84 at death support about 1916. The 1921 transcription instead says September 1917. That census identifies Lloyd as Walter's son; no exact birth date is claimed.",
+    records: [
+      source("1921 Springdale census", "Walter Clarke household · Lloyd recorded as son", "https://ngb.chebucto.org/C1921/21-springdale-tw.shtml"),
+      source("1945 Springdale census", "Lloyd Clarke household · age 29", "https://ngb.chebucto.org/C1945/45-springdale-gb.shtml"),
+      source("Lloyd Brooks Clarke obituary", "The Western Star · 25 October 2000", "https://ngb.chebucto.org/Newspaper-Obits/nw-obit-oct00.shtml")
+    ]
+  },
+  walter: {
+    ahn: 24,
+    top: 70,
+    sex: "male",
+    name: "Walter Clarke",
+    years: "c. 1866–1949",
+    parents: ["josiah"],
+    facts: [["Born", "about 1866 · Back Harbour, Newfoundland"], ["Father", "Josiah Clarke"], ["Occupation", "Lumberman · 1894"], ["Residence", "Springdale · 1921"], ["Died", "20 August 1949 · Springdale"]],
+    note: "Birth evidence conflicts: 8 July 1866 in an appended church-record note, 7 June 1865 in the cemetery transcription, and June 1866 in the 1921 census. The marriage-page note identifies Josiah Clarke and Selina House as Walter's parents.",
+    records: [
+      source("1894 civil marriage transcription", "Walter's age, occupation, and appended parentage note", "https://nlgenweb.dreamhosters.com/nd_civmarr1891.htm"),
+      source("Springdale Old United Cemetery", "Walter Clarke · 1865–1949 transcription", "https://nlgenweb.dreamhosters.com/ndwest_cem_springdaleolduc.htm"),
+      source("1921 Springdale census", "Walter Clarke household", "https://ngb.chebucto.org/C1921/21-springdale-tw.shtml")
+    ]
+  },
+  josiah: {
+    ahn: 48,
+    top: 70,
+    sex: "male",
+    name: "Josiah Clarke",
+    years: "c. 1829–1868",
+    parents: ["johnClarke"],
+    inferredParents: ["johnClarke"],
+    facts: [["Born", "about 1829 · estimated from burial age"], ["Residence", "Battricks Island"], ["Father", "John Clarke · working link"], ["Buried", "17 February 1868 · age 39"]],
+    note: "John is entered as Josiah's father at the researcher's direction. Josiah, about seven, fits one of the three unnamed boys under 14 in John's 1836 household, but the census does not prove the relationship. The dashed connector marks that limit.",
+    records: [
+      source("Josiah Clarke burial", "Twillingate Methodist register · 17 February 1868", "https://ngb.chebucto.org/Parish/tw/twil-meth-bur-1-tw.shtml"),
+      source("1836 Back Harbour census", "John Clark household · unnamed age groups", "https://ngb.chebucto.org/C1836/1836-back-hbr.shtml"),
+      source("Twillingate church events", "Josiah and Selina's 1854 marriage", "https://nlgenweb.dreamhosters.com/nd_chur4.htm")
+    ]
+  },
+  johnClarke: {
+    ahn: 96,
+    top: 70,
+    sex: "male",
+    name: "John Clarke",
+    years: "c. 1800–after 1836",
+    parents: ["williamClarke"],
+    inferredParents: ["williamClarke"],
+    facts: [["Born", "about 1800 · research estimate"], ["Residence", "Battricks Island · 1821"], ["Residence", "Back Harbour · 1836"], ["Father", "William Clarke · working link"], ["Died", "after 1836"]],
+    note: "William is entered as John's father at the researcher's direction. The 1821 room register says John and a co-occupant received the Battricks Island room as a gift from Wm Clark Senr.; it does not state kinship. The dashed connector marks that limit.",
+    records: [
+      source("Twillingate fishing-room register", "Battricks Island · 1821 gift from Wm Clark Senr.", "https://dai.mun.ca/PDFs/archives/RegisterforroomsatTwillingate1806to1828.pdf"),
+      source("1836 Back Harbour census", "John Clark household", "https://ngb.chebucto.org/C1836/1836-back-hbr.shtml"),
+      source("Ann Clark's will", "Made 1833 · names son John", "https://ngb.chebucto.org/Wills/clark-ann-1-277.shtml")
+    ]
+  },
+  williamClarke: {
+    ahn: 192,
+    top: 70,
+    sex: "male",
+    name: "William Clarke",
+    years: "b. 1776–1785 · d. after 1836",
+    parents: [],
+    facts: [["Born", "between 1776 and 1785 · working estimate"], ["Room", "Southwest Battricks Island · 1806"], ["Church petition", "Twillingate · 1811"], ["Residence", "Back Harbour · 1836"], ["Died", "after 1836"]],
+    note: "The estimate assumes the 1806 room claimant and the 1836 William household are the same man. The 1806 claim, 1811 signature, 1821 gift, and 1836 census form a coherent trail, but they do not uniquely prove one identity or state that he was John's father.",
+    records: [
+      source("Twillingate fishing-room register", "William Clark's Room · 1806; gift by Wm Clark Senr. · 1821", "https://dai.mun.ca/PDFs/archives/RegisterforroomsatTwillingate1806to1828.pdf"),
+      source("1811 Twillingate church petition", "Wm Clark among the signers", "https://collections.mun.ca/digital/collection/cns_colonia/id/4821/rec/1"),
+      source("1836 Back Harbour census", "Separate Wm Clark household", "https://ngb.chebucto.org/C1836/1836-back-hbr.shtml")
+    ]
   }
 };
 
 function record(title, meta, image) {
   return { title, meta, image: `records/${image}` };
+}
+
+function source(title, meta, url) {
+  return { title, meta, url };
+}
+
+function recordMarkup(item) {
+  const href = item.image || item.url;
+  const preview = item.image
+    ? `<span class="record-thumb"><img src="${item.image}" alt="" loading="lazy"></span>`
+    : `<span class="record-thumb source-link" aria-hidden="true">SOURCE<br>↗</span>`;
+  const action = item.image ? "Open full scan" : "Open source";
+  return `
+    <a class="record-card" href="${href}" target="_blank" rel="noopener">
+      ${preview}
+      <span><span class="record-title">${item.title}</span><span class="record-meta">${item.meta}<br>${action}</span></span>
+    </a>`;
 }
 
 function initials(name) {
@@ -226,7 +392,7 @@ function nodeMarkup(id, person) {
   const generation = generationFor(person.ahn);
   const first = 2 ** generation;
   const index = person.ahn - first;
-  const top = ((index + 0.5) / first) * 100;
+  const top = person.top ?? ((index + 0.5) / first) * 100;
   const button = document.createElement("button");
   button.type = "button";
   button.id = `person-${id}`;
@@ -265,11 +431,7 @@ function openPerson(person) {
     ${person.note ? `<section class="panel-section"><h3>Research note</h3><div class="note">${person.note}</div></section>` : ""}
     <section class="panel-section">
       <h3>Attached records</h3>
-      <div class="record-list">${person.records.length ? person.records.map(item => `
-        <a class="record-card" href="${item.image}" target="_blank" rel="noopener">
-          <span class="record-thumb"><img src="${item.image}" alt="" loading="lazy"></span>
-          <span><span class="record-title">${item.title}</span><span class="record-meta">${item.meta}<br>Open full scan</span></span>
-        </a>`).join("") : `<p class="empty">No local record image is attached yet.</p>`}</div>
+      <div class="record-list">${person.records.length ? person.records.map(recordMarkup).join("") : `<p class="empty">No record is attached yet.</p>`}</div>
     </section>`;
   panel.classList.add("open");
   panel.setAttribute("aria-hidden", "false");
@@ -309,17 +471,18 @@ function drawConnectors() {
       const mid = x1 + (x2 - x1) / 2;
       const path = document.createElementNS("http://www.w3.org/2000/svg", "path");
       path.setAttribute("d", `M ${x1} ${y1} H ${mid} V ${y2} H ${x2}`);
+      if (child.inferredParents?.includes(parentId)) path.classList.add("inferred");
       svg.append(path);
     });
   });
 }
 
-function startAtGerald(behavior = "smooth") {
+function startAtBenjamin(behavior = "smooth") {
   const viewport = document.getElementById("tree-viewport");
-  const gerald = document.getElementById("person-gerald");
-  viewport.scrollTo({ left: 0, top: Math.max(0, gerald.offsetTop - viewport.clientHeight / 2), behavior });
+  const benjamin = document.getElementById("person-benjamin");
+  viewport.scrollTo({ left: 0, top: Math.max(0, benjamin.offsetTop - viewport.clientHeight / 2), behavior });
 }
 
-document.getElementById("fit-tree").addEventListener("click", () => startAtGerald());
+document.getElementById("fit-tree").addEventListener("click", () => startAtBenjamin());
 window.addEventListener("resize", drawConnectors);
-requestAnimationFrame(() => { drawConnectors(); startAtGerald("auto"); });
+requestAnimationFrame(() => { drawConnectors(); startAtBenjamin("auto"); });

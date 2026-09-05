@@ -4,33 +4,36 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="theme-color" content="#f5f3ee">
-  <meta name="description" content="An interactive Robinson family pedigree with attached records and portraits.">
-  <title>Robinson family tree · cofibre</title>
+  <meta name="description" content="An interactive Robinson and Clarke family pedigree with attached records and source links.">
+  <title>Robinson &amp; Clarke family tree · cofibre</title>
   <link rel="stylesheet" href="styles.css">
 </head>
 <body>
   <header class="topbar">
     <a href="/" class="brand">cofibre</a>
     <div>
-      <h1>Robinson family tree</h1>
-      <p>Click a person to see facts, portraits and records.</p>
+      <h1>Robinson &amp; Clarke family tree</h1>
+      <p>Click a person to see facts, research notes and records.</p>
     </div>
     <a class="gedcom-link" href="data/Robinson_Family_Tree_MASTER.ged" download>Download GEDCOM</a>
   </header>
 
   <main>
     <div class="tree-toolbar" aria-label="Tree controls">
-      <button type="button" id="fit-tree">Start at Gerald</button>
-      <span>Gerald Elmer Robinson · direct ancestors</span>
+      <button type="button" id="fit-tree">Start at Benjamin</button>
+      <span>Benjamin Robinson · direct ancestors · dashed lines are working links</span>
     </div>
     <div class="tree-viewport" id="tree-viewport">
-      <div class="tree-canvas" id="tree-canvas" aria-label="Robinson family pedigree">
+      <div class="tree-canvas" id="tree-canvas" aria-label="Robinson and Clarke family pedigree">
         <svg class="connectors" id="connectors" aria-hidden="true"></svg>
         <div class="generation" id="generation-0" aria-label="Starting person"></div>
         <div class="generation" id="generation-1" aria-label="Parents"></div>
         <div class="generation" id="generation-2" aria-label="Grandparents"></div>
         <div class="generation" id="generation-3" aria-label="Great-grandparents"></div>
         <div class="generation" id="generation-4" aria-label="Earlier direct ancestors"></div>
+        <div class="generation" id="generation-5" aria-label="Earlier direct ancestors"></div>
+        <div class="generation" id="generation-6" aria-label="Earlier direct ancestors"></div>
+        <div class="generation" id="generation-7" aria-label="Earlier direct ancestors"></div>
       </div>
     </div>
   </main>

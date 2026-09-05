@@ -3,14 +3,14 @@
 2 NAME Evidence-cleaned Robinson genealogy
 2 VERS 1.0
 1 DEST ANY
-1 DATE 31 AUG 2026
+1 DATE 5 SEP 2026
 1 FILE Robinson_Family_Tree_MASTER.ged
 1 GEDC
 2 VERS 5.5.1
 2 FORM LINEAGE-LINKED
 1 CHAR UTF-8
 1 LANG English
-1 NOTE Rebuilt from the 31 Aug 2026 Ancestry export. Unsupported propagated facts and citations were removed.
+1 NOTE Rebuilt from the 31 Aug 2026 Ancestry export. Unsupported propagated facts and citations were removed. Clarke direct-line research added 5 Sep 2026 with confidence limits stated in notes.
 0 @SUB1@ SUBM
 1 NAME Private family researcher
 0 @I312807192609@ INDI
@@ -298,13 +298,44 @@
 1 NAME Amon /Robinson/
 2 GIVN Amon
 2 SURN Robinson
+2 SOUR @S16@
+2 SOUR @S20@
+1 NAME Ammon /Robinson/
+2 GIVN Ammon
+2 SURN Robinson
+2 TYPE Record variant
+2 SOUR @S18@
+2 SOUR @S19@
 1 SEX M
 1 FAMS @F6@
 1 FAMS @F13@
+1 BIRT
+2 DATE ABT 1794
+2 PLAC United States
+2 SOUR @S18@
+2 NOTE The 1861 census gives age 67 next birthday and only United States as birthplace; no state, town, or father is identified.
+1 OCCU Labourer
+2 DATE 1861
+2 PLAC Whitchurch Township, York County, Canada West
+2 SOUR @S18@
+1 RESI
+2 DATE 1861
+2 PLAC Whitchurch Township, York County, Canada West
+2 SOUR @S18@
 1 DEAT
 2 DATE BET 25 OCT 1862 AND 5 DEC 1862
 2 SOUR @S16@
 2 NOTE The interval is inferred from execution of the will and its probate; neither date is asserted as the death date.
+1 EVEN
+2 TYPE Acquired property
+2 DATE 7 AUG 1832
+2 PLAC Lot 23, Concession 4, Whitchurch Township, York County, Upper Canada
+2 SOUR @S22@
+2 NOTE William Gold conveyed 50 acres in the east part to Ammon Robinson for $130; instrument 11782 was registered 26 May 1835.
+1 RESI
+2 DATE 1860
+2 PLAC Lot 23, Concession 4, Whitchurch Township, York County, Canada West
+2 SOUR @S23@
 1 EVEN
 2 TYPE Property described in will
 2 DATE 25 OCT 1862
@@ -314,6 +345,12 @@
 1 OBJE @M1@
 1 OBJE @M2@
 1 OBJE @M3@
+1 OBJE @M14@
+1 OBJE @M15@
+1 OBJE @M17@
+1 OBJE @M18@
+1 OBJE @M19@
+1 OBJE @M20@
 0 @I312807199808@ INDI
 1 NAME Annie /Lundy/
 2 GIVN Annie
@@ -326,8 +363,195 @@
 2 SOUR @S16@
 1 SEX F
 1 FAMS @F13@
+1 BIRT
+2 DATE BET 1802 AND 1805
+2 PLAC United States
+2 SOUR @S18@
+2 SOUR @S21@
+2 NOTE The range reconciles age 56 next birthday in 1861 with age 67 at death in 1870.
+1 RESI
+2 DATE 1861
+2 PLAC Whitchurch Township, York County, Canada West
+2 SOUR @S18@
+1 DEAT
+2 DATE 15 FEB 1870
+2 PLAC Whitchurch Township, York County, Ontario, Canada
+2 SOUR @S21@
+2 CAUS Bilious fever
 1 NOTE Amon's will directly identifies wife Anna. Annie Lundy is the supported identification from Thomas Robinson's 1870 marriage record, but she is not attached as James's mother.
+1 NOTE Her age makes her too young to be the biological mother of Silas, born about 1815; an earlier maternal relationship remains unresolved.
 1 OBJE @M2@
+1 OBJE @M14@
+1 OBJE @M15@
+1 OBJE @M16@
+1 OBJE @M17@
+1 OBJE @M18@
+0 @ICARLAC@ INDI
+1 NAME Carla /Clarke/
+2 GIVN Carla
+2 SURN Clarke
+1 SEX F
+1 FAMC @FFREEMANCARLA@
+1 FAMS @F11@
+1 BIRT
+2 DATE 1967
+2 SOUR @S24@
+1 SOUR @S24@
+1 NOTE Name, birth year, parentage, and relationship to Benjamin Robinson were supplied by the private family researcher on 5 Sep 2026; they are not independently documented in the sources reviewed here.
+0 @IFREEMANC@ INDI
+1 NAME Freeman /Clarke/
+2 GIVN Freeman
+2 SURN Clarke
+1 SEX M
+1 FAMC @FLLOYDFREEMAN@
+1 FAMS @FFREEMANCARLA@
+1 BIRT
+2 DATE ABT 1943
+2 SOUR @S24@
+2 SOUR @S28@
+2 NOTE The supplied 1943 year agrees with age 2 in the 1945 Springdale census.
+1 RESI
+2 DATE 1945
+2 PLAC Springdale, Green Bay District, Newfoundland
+2 SOUR @S28@
+1 DEAT
+2 DATE 1998
+2 SOUR @S30@
+2 NOTE His mother's obituary reports that her son Freeman predeceased her in 1998.
+1 NOTE Freeman's father is identified by the 1945 household, where Lloyd Clarke, age 29, is followed by children Freeman, age 2, and Ivan, age 1. The modern continuation to Carla is user-supplied.
+0 @ILLOYDC@ INDI
+1 NAME Lloyd Brooks /Clarke/
+2 GIVN Lloyd Brooks
+2 SURN Clarke
+1 SEX M
+1 FAMC @FWALTERLLOYD@
+1 FAMS @FLLOYDFREEMAN@
+1 BIRT
+2 DATE ABT 1916
+2 PLAC Springdale, Newfoundland
+2 SOUR @S24@
+2 SOUR @S27@
+2 SOUR @S28@
+2 SOUR @S29@
+2 NOTE The working estimate 1916 agrees with age 29 in 1945 and age 84 at death in Oct 2000. The 1921 census transcription instead reports Sep 1917, so no exact birth date is claimed.
+1 RESI
+2 DATE 1921
+2 PLAC Springdale, Twillingate District, Newfoundland
+2 SOUR @S27@
+1 RESI
+2 DATE 1945
+2 PLAC Springdale, Green Bay District, Newfoundland
+2 SOUR @S28@
+1 DEAT
+2 DATE 25 OCT 2000
+2 PLAC Grand Falls-Windsor, Newfoundland and Labrador, Canada
+2 SOUR @S29@
+1 NOTE The 1921 Walter Clarke household identifies Lloyd as Walter's son. The 1945 census and obituary then identify Freeman as Lloyd's son.
+0 @IWALTERC@ INDI
+1 NAME Walter /Clarke/
+2 GIVN Walter
+2 SURN Clarke
+1 SEX M
+1 FAMC @FJOSIAHWALTER@
+1 FAMS @FWALTERLLOYD@
+1 BIRT
+2 DATE ABT 1866
+2 PLAC Back Harbour, Twillingate, Newfoundland
+2 SOUR @S25@
+2 SOUR @S26@
+2 SOUR @S27@
+2 NOTE The reviewed abstracts conflict: a church-record research note gives 8 Jul 1866 at Back Harbour, the cemetery transcription gives 7 Jun 1865, and the 1921 census gives Jun 1866. About 1866 is therefore retained as the cautious conclusion.
+1 OCCU Lumberman
+2 DATE 1894
+2 SOUR @S25@
+1 RESI
+2 DATE 1921
+2 PLAC Springdale, Twillingate District, Newfoundland
+2 SOUR @S27@
+1 DEAT
+2 DATE 20 AUG 1949
+2 PLAC Springdale, Newfoundland
+2 SOUR @S25@
+2 SOUR @S26@
+1 NOTE The marriage research note identifies Walter as a son of Josiah Clarke and Selina House. Per the researcher's instruction, only the Clarke direct line is added as people in this revision.
+0 @IJOSIAHC@ INDI
+1 NAME Josiah /Clarke/
+2 GIVN Josiah
+2 SURN Clarke
+1 SEX M
+1 FAMC @FJOHNJOSIAH@
+1 FAMS @FJOSIAHWALTER@
+1 BIRT
+2 DATE ABT 1829
+2 SOUR @S31@
+2 NOTE Estimated from age 39 at burial on 17 Feb 1868.
+1 RESI
+2 DATE 1857
+2 PLAC Battricks Island, Newfoundland
+2 SOUR @S32@
+1 DEAT
+2 DATE BEF 17 FEB 1868
+2 PLAC Battricks Island, Newfoundland
+2 SOUR @S31@
+2 NOTE The burial transcription supplies the burial date, not an exact death date.
+1 BURI
+2 DATE 17 FEB 1868
+2 PLAC Twillingate, Newfoundland
+2 SOUR @S31@
+1 NOTE Josiah's 1854 marriage and the 1857 and 1860 baptisms place him with Selina House at Battricks Island. Walter's later church-record note identifies that couple as his parents.
+0 @IJOHNC@ INDI
+1 NAME John /Clarke/
+2 GIVN John
+2 SURN Clarke
+1 SEX M
+1 FAMC @FWILLIAMJOHN@
+1 FAMS @FJOHNJOSIAH@
+1 BIRT
+2 DATE ABT 1800
+2 SOUR @S33@
+2 SOUR @S34@
+2 NOTE This is a working estimate, not a recorded birth: John was an occupier of the Battricks Island room in 1821 and an adult household head at Back Harbour in 1836.
+1 RESI
+2 DATE 1821
+2 PLAC Battricks Island, Newfoundland
+2 SOUR @S34@
+1 RESI
+2 DATE 1836
+2 PLAC Back Harbour, Newfoundland
+2 SOUR @S33@
+1 DEAT
+2 DATE AFT 1836
+2 SOUR @S33@
+1 NOTE At the researcher's direction, John is entered as Josiah's father. This remains a working hypothesis: the 1836 John Clark household contains three boys under 14, a structure compatible with Josiah aged about 7, but the census does not name them.
+2 CONT Ann Clark's 1833 will independently identifies a son John in this family cluster.
+0 @IWILLIAMC@ INDI
+1 NAME William /Clarke/
+2 GIVN William
+2 SURN Clarke
+1 SEX M
+1 FAMS @FWILLIAMJOHN@
+1 BIRT
+2 DATE BET 1776 AND 1785
+2 SOUR @S33@
+2 SOUR @S34@
+2 NOTE This estimate combines adulthood as a room claimant by 1806 with the age 14 to 60 bracket of the William Clark household in 1836, assuming the records refer to the same man.
+1 RESI
+2 DATE 1806
+2 PLAC Battricks Island, Newfoundland
+2 SOUR @S34@
+1 RESI
+2 DATE 1811
+2 PLAC Twillingate, Newfoundland
+2 SOUR @S36@
+1 RESI
+2 DATE 1836
+2 PLAC Back Harbour, Newfoundland
+2 SOUR @S33@
+1 DEAT
+2 DATE AFT 1836
+2 SOUR @S33@
+1 NOTE At the researcher's direction, William is entered as John's father. The 1821 room register says John and a co-occupant received the Battricks Island room as a gift from Wm Clark Senr.; it does not state a kinship.
+2 CONT The 1806 room claim, 1811 petition signature, 1821 gift, and 1836 census form a coherent but not yet uniquely proved identity chain.
 0 @F1@ FAM
 1 HUSB @I312807196651@
 1 WIFE @I312807196670@
@@ -407,9 +631,11 @@
 1 NOTE User-supplied structural relationship; not independently verified.
 0 @F11@ FAM
 1 HUSB @I312807192610@
+1 WIFE @ICARLAC@
 1 CHIL @I312807192609@
 1 SOUR @S1@
-1 NOTE User-supplied structural relationship; not independently verified.
+1 SOUR @S24@
+1 NOTE Devin Robinson and Carla Clarke as Benjamin's parents are user-supplied structural relationships; not independently verified.
 0 @F12@ FAM
 1 HUSB @I312807192752@
 1 CHIL @I312807192641@
@@ -420,7 +646,46 @@
 1 WIFE @I312807199808@
 1 SOUR @S16@
 1 SOUR @S19@
+1 SOUR @S20@
 1 NOTE Amon's will calls Anna his wife. This spouse family intentionally has no child link to James.
+0 @FFREEMANCARLA@ FAM
+1 HUSB @IFREEMANC@
+1 CHIL @ICARLAC@
+1 SOUR @S24@
+1 NOTE Freeman Clarke as Carla Clarke's father is supplied by the private family researcher; no independent record was located in this review.
+0 @FLLOYDFREEMAN@ FAM
+1 HUSB @ILLOYDC@
+1 CHIL @IFREEMANC@
+1 SOUR @S24@
+1 SOUR @S28@
+1 SOUR @S29@
+1 SOUR @S30@
+1 NOTE The 1945 Springdale census places Freeman, age 2, as a child in Lloyd's household. Later obituaries corroborate the relationship.
+0 @FWALTERLLOYD@ FAM
+1 HUSB @IWALTERC@
+1 CHIL @ILLOYDC@
+1 SOUR @S24@
+1 SOUR @S27@
+1 SOUR @S28@
+1 NOTE The 1921 Springdale census places Lloyd as a son in Walter's household; the adjacent 1945 Walter and Lloyd households reinforce continuity.
+0 @FJOSIAHWALTER@ FAM
+1 HUSB @IJOSIAHC@
+1 CHIL @IWALTERC@
+1 SOUR @S24@
+1 SOUR @S25@
+1 NOTE The church-record research note attached to Walter's 1894 marriage identifies his parents as Josiah Clarke and Selina House.
+0 @FJOHNJOSIAH@ FAM
+1 HUSB @IJOHNC@
+1 CHIL @IJOSIAHC@
+1 SOUR @S24@
+1 SOUR @S33@
+1 NOTE User-directed working relationship. Josiah's estimated 1829 birth fits one of the three unnamed boys under 14 in John's 1836 Back Harbour household, but no reviewed record directly calls Josiah a son of John.
+0 @FWILLIAMJOHN@ FAM
+1 HUSB @IWILLIAMC@
+1 CHIL @IJOHNC@
+1 SOUR @S24@
+1 SOUR @S34@
+1 NOTE User-directed working relationship. The 1821 room register records a gift from Wm Clark Senr. to John and a co-occupant, but does not explicitly call John William's son.
 0 @M1@ OBJE
 1 FILE ../records/Amon_Robinson_1862_Estate/1862_Amon_Robinson_Estate_01_Probate_Order_Image_655.png
 2 FORM png
@@ -499,6 +764,48 @@
 2 TITL Marriage register entry for George Smithson and Jane Metcalf, 11 December 1845
 1 SOUR @S15@
 1 NOTE Preservation PNG reconstructed losslessly from the downloaded Ancestry source tiles.
+0 @M14@ OBJE
+1 FILE ../records/Amon_Robinson_1861_Census/1861_Ammon_Robinson_Household_Census_Whitchurch_Page_87_Original.jpg
+2 FORM jpg
+2 TITL 1861 census household of Ammon Robinson, Whitchurch
+1 SOUR @S18@
+1 NOTE Complete original census page; the household is on lines 47-50 and the schedule does not state relationships.
+0 @M15@ OBJE
+1 FILE ../records/Thomas_Robinson_1870_Marriage/1870_Thomas_Robinson_Sarah_Brillinger_Marriage_Register_ONMS932_3-1163.jpg
+2 FORM jpg
+2 TITL Marriage registration of Thomas Robinson and Sarah Brillinger, 1870
+1 SOUR @S19@
+1 NOTE Original registration directly names Thomas's parents Ammon Robinson and Annie Lundy.
+0 @M16@ OBJE
+1 FILE ../records/Annie_Robinson_1870_Death/1870_Annie_Robinson_Death_Registration_ONMS935_2-0173.jpg
+2 FORM jpg
+2 TITL Death registration of Annie Robinson, 15 February 1870
+1 SOUR @S21@
+1 NOTE Strong probable match to Amon's widow; the entry states widow, age 67, United States birth, and Whitchurch death but gives no husband or maiden name.
+0 @M17@ OBJE
+1 FILE ../records/Amon_Robinson_Children_1862-1863_Marriages/1862_Silas_and_Mary_Ann_Robinson_Marriages_York_Vol84_Image219.jpg
+2 FORM jpg
+2 TITL Marriages of Silas Robinson and Mary Ann Robinson, 23 September 1862
+1 SOUR @S20@
+1 NOTE Original York County register names the parents of both Robinson children as Amon and Annie Robinson.
+0 @M18@ OBJE
+1 FILE ../records/Amon_Robinson_Children_1862-1863_Marriages/1863_Henry_Robinson_Marriage_York_Vol86_Image6.jpg
+2 FORM jpg
+2 TITL Marriage of Henry Robinson and Emily Birch, 16 June 1863
+1 SOUR @S20@
+1 NOTE Original York County register names Henry's parents as Amon and Anna Robinson.
+0 @M19@ OBJE
+1 FILE ../records/Amon_Robinson_1832-1870_Land/OnLand_LRO65_Book238_Image214_Lot23_Con4_HighZoom.png
+2 FORM png
+2 TITL Abstract index for Lot 23, Concession 4, Whitchurch
+1 SOUR @S22@
+1 NOTE Official land-registry abstract page showing the 1832 William Gold to Ammon Robinson conveyance and later instruments.
+0 @M20@ OBJE
+1 FILE ../records/Amon_Robinson_1832-1870_Land/1860_Tremaine_Amon_Robinson_Lot_23_Concession_4_Crop.jpg
+2 FORM jpg
+2 TITL Amon Robinson on Lot 23, Concession 4, 1860 Tremaine map
+1 SOUR @S23@
+1 NOTE Precise IIIF crop of the repository map; the saved crop is an upscaled derivative of the native map region.
 0 @S1@ SOUR
 1 AUTH Private family researcher
 1 TITL Robinson Family Tree, Ancestry GEDCOM export
@@ -631,16 +938,157 @@
 1 REPO @R2@
 1 NOTE Original census/index records James as a married labourer born in Upper Canada.
 2 CONT https://www.ancestry.ca/search/collections/1570/records/797789005
+0 @S18@ SOUR
+1 AUTH Government of Canada
+1 TITL 1861 Census of Canada, Whitchurch, household of Ammon Robinson
+1 PUBL Library and Archives Canada, microfilm C-1090, Whitchurch Enumeration District 5, page 87; Ancestry collection 1570, record 797789524
+1 REPO @R2@
+1 NOTE Original census page consulted. It records Ammon, age 67 next birthday, and Annie, age 56, both born in the United States; it has no relationship-to-head column.
+2 CONT https://www.ancestry.ca/imageviewer/collections/1570/images/4391955_00026?pId=797789524
+1 OBJE @M14@
 0 @S19@ SOUR
-1 AUTH Ontario civil marriage registrar
-1 TITL Marriage registration of Thomas Robinson, 1870
-1 PUBL Archives of Ontario
+1 AUTH Ontario Registrar General
+1 TITL Marriage registration of Thomas Robinson and Sarah Brillinger, 12 Sep 1870
+1 PUBL Archives of Ontario; Sharon, East Gwillimbury Division, York County; image ONMS932_3-1163; Ancestry collection 7921, record 2543852
 1 REPO @R1@
-1 NOTE Near-contemporary record identifies Thomas's mother as Annie Lundy. Exact reel and record number must be reacquired before website attachment.
+1 NOTE Original registration directly identifies Thomas's parents as Ammon Robinson and Annie Lundy.
+2 CONT https://www.ancestry.ca/imageviewer/collections/7921/images/ONMS932_3-1163?pId=2543852
+1 OBJE @M15@
+0 @S20@ SOUR
+1 AUTH York County marriage registrar
+1 TITL Marriages of Amon Robinson's children, 1862-1863
+1 PUBL Archives of Ontario, RG 80-27-2, MS 248 reel 18; FamilySearch digital film 004146588, images 219 and 6
+1 REPO @R1@
+1 NOTE Original entries name Silas and Mary Ann's parents as Amon and Annie Robinson, and Henry's as Amon and Anna Robinson. Derivative Aaron/Amos spellings are rejected in favour of the manuscript.
+2 CONT https://www.familysearch.org/ark:/61903/3:1:3QS7-89GF-194L-F
+2 CONT https://www.familysearch.org/ark:/61903/3:1:3QS7-89GF-194X-X
+1 OBJE @M17@
+1 OBJE @M18@
+0 @S21@ SOUR
+1 AUTH Ontario Registrar General
+1 TITL Death registration of Annie Robinson, 15 Feb 1870
+1 PUBL Archives of Ontario, registration 007604, Whitchurch Division, York County; image ONMS935_2-0173; Ancestry collection 8946, record 860451
+1 REPO @R1@
+1 NOTE Original entry records a widow, age 67, born in the United States, who died in Whitchurch. It does not name her husband, parents, or maiden surname.
+2 CONT https://www.ancestry.ca/imageviewer/collections/8946/images/ONMS935_2-0173?pId=860451
+1 OBJE @M16@
+0 @S22@ SOUR
+1 AUTH York Region Land Registry Office 65
+1 TITL Abstract index, Lot 23, Concession 4, Whitchurch Township
+1 PUBL OnLand historical book 238, internal book ID 72036, image 214
+1 REPO @R1@
+1 NOTE Official abstract records instrument 11782: William Gold to Ammon Robinson, 50 acres east part, dated 7 Aug 1832 and registered 26 May 1835 for $130.
+2 CONT https://www.onland.ca/ui/65/books/72036/viewer/446730251?page=214
+1 OBJE @M19@
+0 @S23@ SOUR
+1 AUTH George R. Tremaine
+1 TITL Tremaine's map of the county of York, Canada West, 1860
+1 PUBL American Geographical Society Library, University of Wisconsin-Milwaukee, digital ID agsmap030765, sheet 3
+1 NOTE Repository map labels Amon Robinson on Lot 23, Concession 4 in Whitchurch, independently matching the title record and will.
+2 CONT https://collections.lib.uwm.edu/digital/collection/agdm/id/35658/
+1 OBJE @M20@
+0 @S24@ SOUR
+1 AUTH Private family researcher
+1 TITL Clarke direct-line statement supplied 5 Sep 2026
+1 PUBL Researcher correspondence, 5 Sep 2026
+1 NOTE Supplies Carla Clarke born 1967; her father Freeman born 1943; his father Lloyd born 1916; his father Walter born 1866; and directs the working John-to-Josiah and William-to-John relationships.
+2 CONT Treated as a lead or modern-family source, not as independent historical proof.
+0 @S25@ SOUR
+1 AUTH Newfoundland's Grand Banks / NLGenWeb contributors
+1 TITL Notre Dame Bay civil marriages, 1891-1901: Walter Clarke and Lydia Butt
+1 PUBL Transcription and appended research note for marriage 6 Jan 1894
+1 REPO @R4@
+1 NOTE Entry records Walter Clarke, 27, bachelor and lumberman of Wolf Cove. The appended note reports a church-record birth of 8 Jul 1866 at Back Harbour to Josiah Clarke and Selina House, and death 20 Aug 1949.
+2 CONT https://nlgenweb.dreamhosters.com/nd_civmarr1891.htm
+0 @S26@ SOUR
+1 AUTH Newfoundland's Grand Banks / NLGenWeb contributors
+1 TITL Springdale Old United Church Cemetery transcription
+1 PUBL Green Bay District cemetery transcription
+1 REPO @R4@
+1 NOTE Transcribes Walter Clarke as born 7 Jun 1865 and died 20 Aug 1949. The birth date conflicts with the church-record note and census, so it is preserved as a variant rather than silently preferred.
+2 CONT https://nlgenweb.dreamhosters.com/ndwest_cem_springdaleolduc.htm
+0 @S27@ SOUR
+1 AUTH Dominion of Newfoundland
+1 TITL 1921 Census, Springdale: Walter Clarke household
+1 PUBL Twillingate District census transcription, lines 595-603
+1 REPO @R4@
+1 NOTE Walter is recorded born Jun 1866, age 55, with son Lloyd born Sep 1917, age 4. This directly supports Walter as Lloyd's father within the household transcription.
+2 CONT https://ngb.chebucto.org/C1921/21-springdale-tw.shtml
+0 @S28@ SOUR
+1 AUTH Commission of Government, Newfoundland
+1 TITL 1945 Census, Springdale: Walter and Lloyd Clarke households
+1 PUBL Green Bay District census transcription, lines 903-908
+1 REPO @R4@
+1 NOTE Walter, 79, and Lydia, 69, are followed by Lloyd Clarke, 29, with children Freeman, 2, and Ivan, 1. This directly supports Lloyd as Freeman's father within the household transcription.
+2 CONT https://ngb.chebucto.org/C1945/45-springdale-gb.shtml
+0 @S29@ SOUR
+1 AUTH The Western Star
+1 TITL Obituary of Lloyd Brooks Clarke, 25 Oct 2000
+1 PUBL Newspaper obituary transcription
+1 REPO @R4@
+1 NOTE Reports Lloyd Brooks Clarke of Springdale died at age 84 on 25 Oct 2000 in Grand Falls-Windsor; names wife Beatrice and predeceased son Freeman.
+2 CONT https://ngb.chebucto.org/Newspaper-Obits/nw-obit-oct00.shtml
+0 @S30@ SOUR
+1 AUTH Green Bay Funeral Home
+1 TITL Obituary of Beatrice Clarke, 1 May 2015
+1 PUBL Funeral-home obituary
+1 NOTE Reports husband Lloyd died in 2000 and son Freeman died in 1998; used only as collateral support for the Clarke direct line.
+2 CONT https://www.greenbayfuneralhome.ca/obituary/3729732
+0 @S31@ SOUR
+1 AUTH Twillingate Methodist Church
+1 TITL Burial of Josiah Clarke, 17 Feb 1868
+1 PUBL Methodist burial register transcription, 1847-1891
+1 REPO @R4@
+1 NOTE Records Josiah Clarke of Battricks Island buried 17 Feb 1868, age 39. The birth year about 1829 is calculated from that age.
+2 CONT https://ngb.chebucto.org/Parish/tw/twil-meth-bur-1-tw.shtml
+0 @S32@ SOUR
+1 AUTH Twillingate Methodist Church
+1 TITL Josiah Clarke family events, 1854-1860
+1 PUBL Marriage and baptism register transcriptions
+1 REPO @R4@
+1 NOTE Records Josiah Clark and Selina House married 30 Oct 1854, and children James and Frederick associated with Josiah and Selina at Battricks Island in 1857 and 1860. These entries establish the couple and locality but do not name Walter.
+2 CONT https://nlgenweb.dreamhosters.com/nd_chur4.htm
+2 CONT https://nlgenweb.dreamhosters.com/nd_chur2.htm
+2 CONT https://nlgenweb.dreamhosters.com/nd_chur3.htm
+0 @S33@ SOUR
+1 AUTH Government of Newfoundland
+1 TITL 1836 Census, Back Harbour
+1 PUBL Nominal census transcription and archival PDF
+1 REPO @R4@
+1 NOTE John Clark's household contains three males under 14, two males aged 14 to 60, four females under 14, and two females aged 14 to 60. Josiah, about 7, could fit but is unnamed. A separate Wm Clark household contains one male aged 14 to 60.
+2 CONT https://ngb.chebucto.org/C1836/1836-back-hbr.shtml
+2 CONT https://dai.mun.ca/PDFs/archives/NominalCensusExploitsRiverCapeJohnandFogoIsland1836.pdf
+0 @S34@ SOUR
+1 AUTH Government of Newfoundland
+1 TITL Register for rooms at Twillingate, 1806-1828
+1 PUBL Archival register, Battricks Island entries dated 29 Jan 1806 and 8 Oct 1821
+1 REPO @R5@
+1 NOTE The 1806 entry records William Clark's room at southwest Battricks Island. The 1821 entry records John and a co-occupant holding a Battricks Island room by gift of Wm Clark Senr.
+2 CONT This supports continuity and possible close kinship, but it does not state father and son.
+2 CONT https://dai.mun.ca/PDFs/archives/RegisterforroomsatTwillingate1806to1828.pdf
+0 @S35@ SOUR
+1 AUTH Ann Clark
+1 TITL Last will and testament of Ann Clark, 1833; proved 1838
+1 PUBL Newfoundland will-book transcription, volume 1, page 277
+1 REPO @R4@
+1 NOTE Names Ann's sons John, Reuben, and William and daughters Lydia Colbourne and Ann Talbott. It establishes John in the local Clark family cluster but does not identify Ann's husband or prove the direct line claimed here.
+2 CONT https://ngb.chebucto.org/Wills/clark-ann-1-277.shtml
+0 @S36@ SOUR
+1 AUTH Residents of Twillingate
+1 TITL Petition for a new church at Twillingate, 20 Oct 1811
+1 PUBL Colonial Secretary's Office correspondence, GN 2/1/A, volume 22
+1 REPO @R5@
+1 NOTE Wm Clark appears among the signatories. This establishes an adult of that name in the wider locality but does not independently identify him as the Battricks Island room claimant or John's father.
+2 CONT https://collections.mun.ca/digital/collection/cns_colonia/id/4821/rec/1
+2 CONT https://dai.mun.ca/PDFs/cns_colonia/A51_V22.pdf
 0 @R1@ REPO
 1 NAME Archives of Ontario
 0 @R2@ REPO
 1 NAME Library and Archives Canada
 0 @R3@ REPO
 1 NAME Borthwick Institute for Archives
+0 @R4@ REPO
+1 NAME Newfoundland's Grand Banks / NLGenWeb
+0 @R5@ REPO
+1 NAME Memorial University of Newfoundland Digital Archives Initiative
 0 TRLR
