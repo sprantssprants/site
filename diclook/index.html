@@ -1,0 +1,31 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Word finder</title>
+  <style>
+    body { background: white; color: black; }
+    h1 { font-size: 1.5em; }
+    h2 { font-size: 1.125em; }
+    input, button { font-size: 16px; }
+    input { width: 16ch; max-width: 65vw; }
+  </style>
+</head>
+<body>
+  <h1>Word finder</h1>
+  <p>Up to 12 letters, including up to two ? blanks. CSW19 + CSW24.</p>
+  <form id="search-form">
+    <label for="letters">Letters:</label>
+    <input id="letters" name="letters" type="text" autocomplete="off"
+      autocapitalize="characters" spellcheck="false" enterkeyhint="search"
+      aria-describedby="help" autofocus>
+    <button type="submit">Find</button>
+  </form>
+  <p id="help">Press Enter to search. Bold letters use blanks.</p>
+  <p id="status" role="status" aria-live="polite">Loading dictionary...</p>
+  <div id="results"></div>
+  <noscript><p>Please enable JavaScript to use the word finder.</p></noscript>
+  <script src="/diclook/finder.js?v=1" defer></script>
+</body>
+</html>
