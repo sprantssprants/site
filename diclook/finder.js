@@ -9,8 +9,17 @@ let requestId = 0;
 
 function startWorker() {
   if (worker) return worker;
-  worker = new Worker("/diclook/worker.js?v=1");
+  const workerUrl = URL.createObjectURL(new Blob(
+    [window.WORD_FINDER_WORKER_SOURCE], { type: "text/javascript" }
+  ));
+  try {
+    worker = new Worker(workerUrl);
+  } catch (error) {
+    URL.revokeObjectURL(workerUrl);
+    throw error;
+  }
   worker.onmessage = ({ data }) => {
+    URL.revokeObjectURL(workerUrl);
     if (data.id !== requestId) return;
     if (data.type === "ready") {
       status.textContent = "Enter your letters above.";
@@ -22,10 +31,11 @@ function startWorker() {
         : "No words found.";
     } else if (data.type === "error") {
       results.replaceChildren();
-      status.textContent = "Couldn't load the dictionary. Check your connection and press Enter to try again.";
+      status.textContent = "Couldn't load the local dictionary. Press Enter to try again.";
     }
   };
   worker.onerror = () => {
+    URL.revokeObjectURL(workerUrl);
     worker.terminate();
     worker = null;
     results.replaceChildren();
