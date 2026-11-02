@@ -172,7 +172,12 @@
     }
     .mcmc-controls label { white-space: nowrap; line-height: 24px; }
     .mcmc-controls output { display: inline-block; min-width: 7ch; font-variant-numeric: tabular-nums; }
-    .mcmc-slider { flex: 1 1 240px; min-width: 0; }
+    .mcmc-controls, .mcmc-controls * {
+      -webkit-user-select: none;
+      user-select: none;
+      -webkit-user-drag: none;
+    }
+    .mcmc-slider { flex: 1 1 240px; min-width: 0; touch-action: none; cursor: pointer; }
     .mcmc-step-guide { display: grid; grid-template-columns: 1fr 1fr 1fr; }
     .mcmc-step-guide, .mcmc-step-guide * {
       -webkit-user-select: none;
@@ -391,6 +396,6 @@
     </main>
   </div>
   <script src="vendor/katex/katex.min.js" defer></script>
-  <script src="mcmc.js" defer></script>
+  <script src="mcmc.js?v=pointer-controls-1" defer></script>
 </body>
 </html>

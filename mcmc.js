@@ -198,6 +198,59 @@
   }
 
   slider.addEventListener("input", restart);
+  const sliderArea = slider.closest(".mcmc-slider");
+  let activePointer = null;
+  let pointerStartValue = null;
+
+  function updateSliderFromPointer(event) {
+    const bounds = slider.getBoundingClientRect();
+    // The 16px thumb's centre travels from 8px to width - 8px.
+    const fraction = Math.max(0, Math.min(1,
+      (event.clientX - bounds.left - 8) / Math.max(1, bounds.width - 16)
+    ));
+    const minimum = Number(slider.min);
+    const rawValue = minimum + fraction * (Number(slider.max) - minimum);
+    if (Number(slider.value) === rawValue) return;
+    slider.value = String(rawValue);
+    // Keep the existing x^2 / 10 mapping and animation restart behaviour.
+    slider.dispatchEvent(new Event("input", { bubbles: true }));
+  }
+
+  sliderArea.addEventListener("pointerdown", (event) => {
+    if (!event.isPrimary || event.button !== 0 || activePointer !== null) return;
+    event.preventDefault();
+    slider.focus({ preventScroll: true });
+    activePointer = event.pointerId;
+    pointerStartValue = slider.value;
+    sliderArea.setPointerCapture(event.pointerId);
+    updateSliderFromPointer(event);
+  });
+  sliderArea.addEventListener("pointermove", (event) => {
+    if (event.pointerId !== activePointer) return;
+    event.preventDefault();
+    updateSliderFromPointer(event);
+  });
+  sliderArea.addEventListener("pointerup", (event) => {
+    if (event.pointerId !== activePointer) return;
+    event.preventDefault();
+    updateSliderFromPointer(event);
+    const changed = slider.value !== pointerStartValue;
+    activePointer = null;
+    if (sliderArea.hasPointerCapture(event.pointerId)) {
+      sliderArea.releasePointerCapture(event.pointerId);
+    }
+    if (changed) slider.dispatchEvent(new Event("change", { bubbles: true }));
+  });
+  function cancelSliderPointer(event) {
+    if (event.pointerId === activePointer) activePointer = null;
+  }
+  sliderArea.addEventListener("pointercancel", cancelSliderPointer);
+  sliderArea.addEventListener("lostpointercapture", cancelSliderPointer);
+  // Prevent native text/image dragging anywhere within the slider control.
+  const controls = slider.closest(".mcmc-controls");
+  controls.addEventListener("selectstart", (event) => event.preventDefault());
+  controls.addEventListener("dragstart", (event) => event.preventDefault());
+
   slider.addEventListener("keydown", (event) => {
     // Keyboard controls adjust the displayed scale, rather than the raw x value.
     if (event.altKey || event.ctrlKey || event.metaKey) return;
